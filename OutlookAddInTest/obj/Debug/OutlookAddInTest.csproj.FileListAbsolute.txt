@@ -11,3 +11,17 @@ C:\Users\millerna\Documents\Visual Studio 2013\Projects\OutlookAddInTest\Outlook
 C:\Users\millerna\Documents\Visual Studio 2013\Projects\OutlookAddInTest\OutlookAddInTest\obj\Debug\OutlookAddInTest.csproj.GenerateResource.Cache
 C:\Users\millerna\Documents\Visual Studio 2013\Projects\OutlookAddInTest\OutlookAddInTest\obj\Debug\OutlookAddInTest.dll
 C:\Users\millerna\Documents\Visual Studio 2013\Projects\OutlookAddInTest\OutlookAddInTest\obj\Debug\OutlookAddInTest.pdb
+C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\bin\Debug\OutlookAddInTest.dll
+C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\bin\Debug\OutlookAddInTest.pdb
+C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\bin\Debug\OutlookAddInTest.dll.manifest
+C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\bin\Debug\OutlookAddInTest.vsto
+C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\bin\Debug\Microsoft.Office.Tools.Outlook.v4.0.Utilities.dll
+C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
+C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\bin\Debug\Microsoft.Office.Tools.Outlook.v4.0.Utilities.xml
+C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInTest.FormRegion1.resources
+C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInTest.FormTest.resources
+C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInTest.Properties.Resources.resources
+C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInTest.csproj.GenerateResource.Cache
+C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInTest.dll
+C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInTest.pdb

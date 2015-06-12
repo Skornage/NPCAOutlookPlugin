@@ -12,6 +12,8 @@ namespace OutlookAddInTest
     {
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
+			//Object selObject = this.Application.ActiveExplorer().Selection[1];
+			//System.Diagnostics.Debug.WriteLine(selObject);
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
@@ -21,16 +23,6 @@ namespace OutlookAddInTest
 		protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject()
 		{
 			return new Ribbon1();
-		}
-
-		public void OnTextButton(Office.IRibbonControl control)
-		{
-			// Do nothing
-		}
-
-		public void OnTableButton(Office.IRibbonControl control)
-		{
-			// Do nothing
 		}
 
         #region VSTO generated code

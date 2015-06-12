@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using Outlook = Microsoft.Office.Interop.Outlook;
 using Office = Microsoft.Office.Core;
 
 // TODO:  Follow these steps to enable the Ribbon (XML) item:
@@ -55,6 +56,34 @@ namespace OutlookAddInTest
 		}
 
 		#endregion
+
+		public void OnTextButton(Office.IRibbonControl control)
+		{
+			// Do Nothing\
+			try
+			{
+				Object explorer = Globals.ThisAddIn.Application.ActiveWindow().Selection[1];
+				if (explorer is Outlook.MailItem)
+				{
+					Outlook.MailItem mailItem = (explorer as Outlook.MailItem);
+					FormTest form = new FormTest(mailItem);
+					form.Show();
+				}
+				else
+				{
+					System.Diagnostics.Debug.WriteLine("You did not select an email item");
+				}
+			}
+			catch (System.Runtime.InteropServices.COMException)
+			{
+				System.Diagnostics.Debug.WriteLine("Failed");
+			}
+		}
+
+		public void OnTableButton(Office.IRibbonControl control)
+		{
+			// Do nothing
+		}
 
 		#region Helpers
 
