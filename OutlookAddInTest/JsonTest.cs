@@ -10,6 +10,8 @@ namespace OutlookAddInTest
 	{
 		public static String getJsonObject()
 		{
+            
+
 			return Newtonsoft.Json.JsonConvert.SerializeObject(new
 			{
 				results = new List<Result>()

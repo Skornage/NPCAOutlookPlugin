@@ -42,12 +42,28 @@ namespace OutlookAddInTest
 
 		private void populateListBox()
 		{
-			dynamic dynJson = JsonTest.getJsonObject().DeserializeObject(json);
-			foreach (var item in dynJson)
+            string test = JsonTest.getJsonObject();
+            
+            Newtonsoft.Json.Linq.JToken json = Newtonsoft.Json.Linq.JToken.Parse(test);
+
+			foreach (var item in json.First.First)
 			{
-				Console.WriteLine("{0} {1} {2} {3}\n", item.id, item.displayName, 
-				item.slug, item.imageUrl);
+                String[] line = {(String)item["id"], (String)item["type"],
+                (String)item["name"], (String)item["email"], (String)item["info"]};
+                //String line = String.Format("{0}, {1}, {2}, {3}, {4}", item["id"], item["type"],
+                //item["name"], item["email"], item["info"]);
+                listView1.Items.Add(new ListViewItem(line));
 			}
+            listView1.Columns[0].Width = -2;
+            listView1.Columns[1].Width = -2;
+            listView1.Columns[2].Width = -2;
+            listView1.Columns[3].Width = -2;
+            listView1.Columns[4].Width = -2;
 		}
+
+        private void FormTest_Load(object sender, EventArgs e)
+        {
+
+        }
 	}
 }

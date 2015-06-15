@@ -26,3 +26,20 @@ C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInT
 C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInTest.dll
 C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInTest.pdb
 C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInTest.csprojResolveAssemblyReference.cache
+C:\Users\greenjm\Documents\Visual Studio 2013\Projects\NPCAOutlookPlugin\OutlookAddInTest\bin\Debug\OutlookAddInTest.dll
+C:\Users\greenjm\Documents\Visual Studio 2013\Projects\NPCAOutlookPlugin\OutlookAddInTest\bin\Debug\OutlookAddInTest.pdb
+C:\Users\greenjm\Documents\Visual Studio 2013\Projects\NPCAOutlookPlugin\OutlookAddInTest\bin\Debug\OutlookAddInTest.dll.manifest
+C:\Users\greenjm\Documents\Visual Studio 2013\Projects\NPCAOutlookPlugin\OutlookAddInTest\bin\Debug\OutlookAddInTest.vsto
+C:\Users\greenjm\Documents\Visual Studio 2013\Projects\NPCAOutlookPlugin\OutlookAddInTest\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+C:\Users\greenjm\Documents\Visual Studio 2013\Projects\NPCAOutlookPlugin\OutlookAddInTest\bin\Debug\Microsoft.Office.Tools.Outlook.v4.0.Utilities.dll
+C:\Users\greenjm\Documents\Visual Studio 2013\Projects\NPCAOutlookPlugin\OutlookAddInTest\bin\Debug\Newtonsoft.Json.dll
+C:\Users\greenjm\Documents\Visual Studio 2013\Projects\NPCAOutlookPlugin\OutlookAddInTest\bin\Debug\Newtonsoft.Json.xml
+C:\Users\greenjm\Documents\Visual Studio 2013\Projects\NPCAOutlookPlugin\OutlookAddInTest\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
+C:\Users\greenjm\Documents\Visual Studio 2013\Projects\NPCAOutlookPlugin\OutlookAddInTest\bin\Debug\Microsoft.Office.Tools.Outlook.v4.0.Utilities.xml
+C:\Users\greenjm\Documents\Visual Studio 2013\Projects\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInTest.csprojResolveAssemblyReference.cache
+C:\Users\greenjm\Documents\Visual Studio 2013\Projects\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInTest.FormRegion1.resources
+C:\Users\greenjm\Documents\Visual Studio 2013\Projects\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInTest.FormTest.resources
+C:\Users\greenjm\Documents\Visual Studio 2013\Projects\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInTest.Properties.Resources.resources
+C:\Users\greenjm\Documents\Visual Studio 2013\Projects\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInTest.csproj.GenerateResource.Cache
+C:\Users\greenjm\Documents\Visual Studio 2013\Projects\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInTest.dll
+C:\Users\greenjm\Documents\Visual Studio 2013\Projects\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInTest.pdb
