@@ -25,3 +25,4 @@ C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInT
 C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInTest.csproj.GenerateResource.Cache
 C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInTest.dll
 C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInTest.pdb
+C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInTest.csprojResolveAssemblyReference.cache

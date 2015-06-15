@@ -16,6 +16,8 @@ namespace OutlookAddInTest
 		public FormTest(Outlook.MailItem mailItem)
 		{
 			InitializeComponent();
+			populateListBox();
+			comboBox1.SelectedIndex = 0;
 		}
 
 		private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -31,6 +33,21 @@ namespace OutlookAddInTest
 		private void Ok_Click(object sender, EventArgs e)
 		{
 			this.Close();
+		}
+
+		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void populateListBox()
+		{
+			dynamic dynJson = JsonTest.getJsonObject().DeserializeObject(json);
+			foreach (var item in dynJson)
+			{
+				Console.WriteLine("{0} {1} {2} {3}\n", item.id, item.displayName, 
+				item.slug, item.imageUrl);
+			}
 		}
 	}
 }
