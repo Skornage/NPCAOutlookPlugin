@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Outlook = Microsoft.Office.Interop.Outlook;
+using Newtonsoft.Json.Linq;
 
 namespace OutlookAddInTest
 {
@@ -16,7 +17,7 @@ namespace OutlookAddInTest
 		public FormTest(Outlook.MailItem mailItem)
 		{
 			InitializeComponent();
-			populateListBox();
+			populateListBox(0);
 			comboBox1.SelectedIndex = 0;
 		}
 
@@ -37,28 +38,51 @@ namespace OutlookAddInTest
 
 		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
 		{
-
+			populateListBox(comboBox1.SelectedIndex);
 		}
 
-		private void populateListBox()
+		private void populateListBox(int index)
 		{
-            string test = JsonTest.getJsonObject();
-            
-            Newtonsoft.Json.Linq.JToken json = Newtonsoft.Json.Linq.JToken.Parse(test);
-
-			foreach (var item in json.First.First)
+			JObject dynJson = JsonTest.getJsonObjectTwo();
+			if (listView1.Items.Count > 0)
 			{
-                String[] line = {(String)item["id"], (String)item["type"],
-                (String)item["name"], (String)item["email"], (String)item["info"]};
-                //String line = String.Format("{0}, {1}, {2}, {3}, {4}", item["id"], item["type"],
-                //item["name"], item["email"], item["info"]);
-                listView1.Items.Add(new ListViewItem(line));
+				listView1.Items.Clear();
 			}
-            listView1.Columns[0].Width = -2;
-            listView1.Columns[1].Width = -2;
-            listView1.Columns[2].Width = -2;
-            listView1.Columns[3].Width = -2;
-            listView1.Columns[4].Width = -2;
+			//listView1.Clear();
+			if (index == 0 && listView1.Items.Count == 0)
+			{
+				foreach (KeyValuePair<String, JToken> item in dynJson)
+				{
+					String[] line = {(String) item.Value["id"], (String) item.Value["type"],
+					(String) item.Value["name"], (String) item.Value["email"], (String) item.Value["info"]};
+					listView1.Items.Add(new ListViewItem(line));
+				}
+			} else if (index == 1) {
+				foreach (KeyValuePair<String, JToken> item in dynJson)
+				{
+					if (((String) item.Value["type"]).Equals("Account"))
+					{
+						String[] line = {(String) item.Value["id"], (String) item.Value["type"],
+						(String) item.Value["name"], (String) item.Value["email"], (String) item.Value["info"]};
+						listView1.Items.Add(new ListViewItem(line));
+					}
+				}
+			} else {
+				foreach (KeyValuePair<String, JToken> item in dynJson)
+				{
+					if (((String) item.Value["type"]).Equals("Contact"))
+					{
+						String[] line = {(String) item.Value["id"], (String) item.Value["type"],
+						(String) item.Value["name"], (String) item.Value["email"], (String) item.Value["info"]};
+						listView1.Items.Add(new ListViewItem(line));
+					}
+				}
+			}
+			listView1.Columns[0].Width = -2;
+			listView1.Columns[1].Width = -2;
+			listView1.Columns[2].Width = -2;
+			listView1.Columns[3].Width = -2;
+			listView1.Columns[4].Width = -2;
 		}
 
         private void FormTest_Load(object sender, EventArgs e)
