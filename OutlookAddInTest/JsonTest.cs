@@ -39,7 +39,7 @@ namespace OutlookAddInTest
 					{
 						""id"":""value2"",
 						""type"":""Account"",
-						""name"":""NPCA"",
+						""name"":""Josh"",
 						""email"":""millerna@rose-hulman.edu"",
 						""info"":""test""
 					},
@@ -47,7 +47,7 @@ namespace OutlookAddInTest
 					{
 						""id"":""value2"",
 						""type"":""Account"",
-						""name"":""NPCA"",
+						""name"":""Noah"",
 						""email"":""millerna@rose-hulman.edu"",
 						""info"":""test""
 					},
@@ -55,7 +55,7 @@ namespace OutlookAddInTest
 					{
 						""id"":""value2"",
 						""type"":""Account"",
-						""name"":""NPCA"",
+						""name"":""Alex"",
 						""email"":""millerna@rose-hulman.edu"",
 						""info"":""test""
 					},
@@ -63,7 +63,7 @@ namespace OutlookAddInTest
 					{
 						""id"":""value2"",
 						""type"":""Account"",
-						""name"":""NPCA"",
+						""name"":""New Name"",
 						""email"":""millerna@rose-hulman.edu"",
 						""info"":""test""
 					},
@@ -71,7 +71,7 @@ namespace OutlookAddInTest
 					{
 						""id"":""value2"",
 						""type"":""Account"",
-						""name"":""NPCA"",
+						""name"":""Old Name"",
 						""email"":""millerna@rose-hulman.edu"",
 						""info"":""test""
 					},
@@ -79,7 +79,7 @@ namespace OutlookAddInTest
 					{
 						""id"":""value2"",
 						""type"":""Account"",
-						""name"":""NPCA"",
+						""name"":""Searching"",
 						""email"":""millerna@rose-hulman.edu"",
 						""info"":""test""
 					},
@@ -87,7 +87,7 @@ namespace OutlookAddInTest
 					{
 						""id"":""value2"",
 						""type"":""Account"",
-						""name"":""NPCA"",
+						""name"":""Other"",
 						""email"":""millerna@rose-hulman.edu"",
 						""info"":""test""
 					},
@@ -95,7 +95,7 @@ namespace OutlookAddInTest
 					{
 						""id"":""value2"",
 						""type"":""Account"",
-						""name"":""NPCA"",
+						""name"":""Jason"",
 						""email"":""millerna@rose-hulman.edu"",
 						""info"":""test""
 					},

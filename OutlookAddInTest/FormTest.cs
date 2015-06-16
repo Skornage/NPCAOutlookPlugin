@@ -14,12 +14,20 @@ namespace OutlookAddInTest
 {
 	public partial class FormTest : Form
 	{
+        DataTable dt = new DataTable();
+        BindingSource bs = new BindingSource();
 		public FormTest(Outlook.MailItem mailItem)
 		{
 			InitializeComponent();
-			populateListBox(0);
+            populateDataGrid(0);
 			comboBox1.SelectedIndex = 0;
+            textBox1.TextChanged += new EventHandler(searchTextChanged);
 		}
+
+        private void searchTextChanged(object sender, EventArgs e)
+        {
+            bs.Filter = string.Format("name LIKE '{0}%'", textBox1.Text);
+        }
 
 		private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
 		{
@@ -33,61 +41,59 @@ namespace OutlookAddInTest
 
 		private void Ok_Click(object sender, EventArgs e)
 		{
+            DataGridViewRow row = dataGridView1.CurrentRow;
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(System.IO.Directory.GetCurrentDirectory() + @"\Visual Studio 2013\Projects\NPCAOutlookPlugin\Output\Selections.txt", true))
+            {
+                  file.WriteLine(string.Format("id: {0}, type: {1}, name: {2}, email: {3}, info: {4}. Time: {5}",
+                  row.Cells["id"].Value, row.Cells["type"].Value, row.Cells["name"].Value, row.Cells["email"].Value,
+                  row.Cells["info"].Value, DateTime.Now));
+            }
 			this.Close();
 		}
 
 		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			populateListBox(comboBox1.SelectedIndex);
+            if (comboBox1.SelectedIndex == 1)
+            {
+                dt.DefaultView.RowFilter = "type = 'Account'";
+            }
+            else if (comboBox1.SelectedIndex == 2)
+            {
+                dt.DefaultView.RowFilter = "type = 'Contact'";
+            }
+            else
+            {
+                dt.DefaultView.RowFilter = "";
+            }
 		}
 
-		private void populateListBox(int index)
-		{
-			JObject dynJson = JsonTest.getJsonObjectTwo();
-			if (listView1.Items.Count > 0)
-			{
-				listView1.Items.Clear();
-			}
-			//listView1.Clear();
-			if (index == 0 && listView1.Items.Count == 0)
-			{
-				foreach (KeyValuePair<String, JToken> item in dynJson)
-				{
-					String[] line = {(String) item.Value["id"], (String) item.Value["type"],
+        private void populateDataGrid(int index)
+        {
+            dt.Columns.Add("id", typeof(String));
+            dt.Columns.Add("type", typeof(String));
+            dt.Columns.Add("name", typeof(String));
+            dt.Columns.Add("email", typeof(String));
+            dt.Columns.Add("info", typeof(String));
+
+            JObject dynJson = JsonTest.getJsonObjectTwo();
+            foreach (KeyValuePair<String, JToken> item in dynJson)
+            {
+                String[] line = {(String) item.Value["id"], (String) item.Value["type"],
 					(String) item.Value["name"], (String) item.Value["email"], (String) item.Value["info"]};
-					listView1.Items.Add(new ListViewItem(line));
-				}
-			} else if (index == 1) {
-				foreach (KeyValuePair<String, JToken> item in dynJson)
-				{
-					if (((String) item.Value["type"]).Equals("Account"))
-					{
-						String[] line = {(String) item.Value["id"], (String) item.Value["type"],
-						(String) item.Value["name"], (String) item.Value["email"], (String) item.Value["info"]};
-						listView1.Items.Add(new ListViewItem(line));
-					}
-				}
-			} else {
-				foreach (KeyValuePair<String, JToken> item in dynJson)
-				{
-					if (((String) item.Value["type"]).Equals("Contact"))
-					{
-						String[] line = {(String) item.Value["id"], (String) item.Value["type"],
-						(String) item.Value["name"], (String) item.Value["email"], (String) item.Value["info"]};
-						listView1.Items.Add(new ListViewItem(line));
-					}
-				}
-			}
-			listView1.Columns[0].Width = -2;
-			listView1.Columns[1].Width = -2;
-			listView1.Columns[2].Width = -2;
-			listView1.Columns[3].Width = -2;
-			listView1.Columns[4].Width = -2;
-		}
+                dt.Rows.Add(line);
+            }
+            bs.DataSource = dt;
+            dataGridView1.DataSource = bs;
+        }
 
         private void FormTest_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridView1.CurrentRow.Selected = true;
         }
 	}
 }
