@@ -146,6 +146,11 @@ namespace OutlookAddInTest
 
 		}
 
+		private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
+		}
+
         public static void DisplayAccountInformation(Outlook.Application application)
         {
             Outlook.Accounts accounts = application.Session.Accounts;
