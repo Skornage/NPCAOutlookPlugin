@@ -140,8 +140,11 @@ namespace OutlookAddInTest
             bs.Filter = string.Format("id LIKE '%{0}%' AND type LIKE '%{1}%' AND name LIKE '%{2}%' AND email LIKE '%{3}%' AND info LIKE '%{4}%'",
                                        id, type, name, email, info);
         }
-	
 
+		private void FormTest_Load(object sender, EventArgs e)
+		{
+
+		}
 
         public static void DisplayAccountInformation(Outlook.Application application)
         {
