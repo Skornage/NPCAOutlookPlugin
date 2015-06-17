@@ -143,7 +143,7 @@ namespace OutlookAddInTest
 					{
 						""id"":""value2"",
 						""type"":""Contact"",
-						""name"":""NPCA"",
+						""name"":""Jason"",
 						""email"":""millerna@rose-hulman.edu"",
 						""info"":""test""
 					},

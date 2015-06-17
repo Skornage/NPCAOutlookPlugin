@@ -26,7 +26,14 @@ namespace OutlookAddInTest
 
         private void searchTextChanged(object sender, EventArgs e)
         {
-            bs.Filter = string.Format("name LIKE '{0}%'", textBox1.Text);
+            if (comboBox1.SelectedIndex != 0)
+            {
+                bs.Filter = string.Format("name LIKE '{0}%' AND type='{1}'", textBox1.Text, comboBox1.SelectedItem);
+            }
+            else
+            {
+                bs.Filter = string.Format("name LIKE '{0}%'", textBox1.Text);
+            }         
         }
 
 		private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
