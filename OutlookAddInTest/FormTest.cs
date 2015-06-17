@@ -14,15 +14,24 @@ namespace OutlookAddInTest
 {
 	public partial class FormTest : Form
 	{
+		private Outlook.MailItem mailItem;
         DataTable dt = new DataTable();
         BindingSource bs = new BindingSource();
 		public FormTest(Outlook.MailItem mailItem)
 		{
+			this.mailItem = mailItem;
 			InitializeComponent();
             DisplayAccountInformation(Globals.ThisAddIn.Application);
             populateDataGrid(0);
 			comboBox1.SelectedIndex = 0;
             textBox1.TextChanged += new EventHandler(searchTextChanged);
+
+			Outlook.Categories categories = mailItem.Application.Session.Categories;
+			if (!CategoryExists("Phoenix archived"))
+			{
+				Outlook.Category category = categories.Add("Phoenix archived",
+					Outlook.OlCategoryColor.olCategoryColorDarkBlue);
+			}
 		}
 
         private void searchTextChanged(object sender, EventArgs e)
@@ -49,14 +58,39 @@ namespace OutlookAddInTest
 
 		private void Ok_Click(object sender, EventArgs e)
 		{
-            DataGridViewRow row = dataGridView1.CurrentRow;
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(System.IO.Directory.GetCurrentDirectory() + @"\Visual Studio 2013\Projects\NPCAOutlookPlugin\Output\Selections.txt", true))
-            {
-                  file.WriteLine(string.Format("id: {0}, type: {1}, name: {2}, email: {3}, info: {4}. Time: {5}",
-                  row.Cells["id"].Value, row.Cells["type"].Value, row.Cells["name"].Value, row.Cells["email"].Value,
-                  row.Cells["info"].Value, DateTime.Now));
-            }
+			DataGridViewRow row = dataGridView1.CurrentRow;
+			using (System.IO.StreamWriter file = new System.IO.StreamWriter(System.IO.Directory.GetCurrentDirectory() + @"\Visual Studio 2013\Projects\NPCAOutlookPlugin\Output\Selections.txt", true))
+			{
+				file.WriteLine(string.Format("id: {0}, type: {1}, name: {2}, email: {3}, info: {4}. Time: {5}",
+				row.Cells["id"].Value, row.Cells["type"].Value, row.Cells["name"].Value, row.Cells["email"].Value,
+				row.Cells["info"].Value, DateTime.Now));
+			}
+
+			if (mailItem.Categories == null)
+			{
+				mailItem.Categories = "Phoenix archived";
+			}
+			else if (mailItem.Categories.Contains("Phoenix archived"))
+			{
+				// Do nothing.
+			}
+			else
+			{
+				mailItem.Categories += ", Phoenix archived";
+			}
+			mailItem.Save();
+			System.Diagnostics.Debug.WriteLine(mailItem.Sender);
 			this.Close();
+		}
+
+		private bool CategoryExists(string categoryName)
+		{
+			try
+			{
+				Outlook.Category category = mailItem.Application.Session.Categories[categoryName];
+				return (category != null);
+			}
+			catch { return false; }
 		}
 
 		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
