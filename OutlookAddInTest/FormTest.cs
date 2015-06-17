@@ -98,7 +98,15 @@ namespace OutlookAddInTest
 
 		private void button3_Click(object sender, EventArgs e)
 		{
-
+            SearchForm searchForm = new SearchForm(this);
+            searchForm.Show();
 		}
+
+        public void advancedSearch(string id, string type, string name, string email, string info)
+        {
+            comboBox1.SelectedIndex = 0;
+            bs.Filter = string.Format("id LIKE '%{0}%' AND type LIKE '%{1}%' AND name LIKE '%{2}%' AND email LIKE '%{3}%' AND info LIKE '%{4}%'",
+                                       id, type, name, email, info);
+        }
 	}
 }
