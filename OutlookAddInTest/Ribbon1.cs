@@ -92,12 +92,15 @@ namespace OutlookAddInTest
 			Outlook.MailItem mailItem = getMailItem();
 			if (mailItem != null)
 			{
-				if (mailItem.Categories.Contains("Phoenix archived"))
+				if (mailItem.Categories != null)
 				{
-					mailItem.Categories = mailItem.Categories.Replace("Phoenix archived", "");
-					if (mailItem.Categories != null)
+					if (mailItem.Categories.Contains("Phoenix archived"))
 					{
-						mailItem.Categories = mailItem.Categories.Replace(",,", ",");
+						mailItem.Categories = mailItem.Categories.Replace("Phoenix archived", "");
+						if (mailItem.Categories != null)
+						{
+							mailItem.Categories = mailItem.Categories.Replace(",,", ",");
+						}
 					}
 				}
 				mailItem.Save();
