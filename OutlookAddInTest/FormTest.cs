@@ -65,16 +65,11 @@ namespace OutlookAddInTest
 			{
 				mailItem.Categories = "Phoenix archived";
 			}
-			else if (mailItem.Categories.Contains("Phoenix archived"))
-			{
-				mailItem.Categories = "";
-			}
 			else
 			{
 				mailItem.Categories += ", Phoenix archived";
 			}
 			mailItem.Save();
-			System.Diagnostics.Debug.WriteLine(mailItem.Sender);
 			this.Close();
 		}
 

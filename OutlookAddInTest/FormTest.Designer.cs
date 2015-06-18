@@ -152,6 +152,6 @@
 		private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.BindingSource jsonTestBindingSource;
+		private System.Windows.Forms.BindingSource jsonTestBindingSource;
 	}
 }

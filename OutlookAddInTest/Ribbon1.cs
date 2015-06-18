@@ -59,30 +59,49 @@ namespace OutlookAddInTest
 
 		public void OnTextButton(Office.IRibbonControl control)
 		{
-			// Do Nothing\
+			Outlook.MailItem item = getMailItem();
+			if (item != null)
+			{
+				FormTest form = new FormTest(item);
+				form.Show();
+			}
+		}
+
+		private Outlook.MailItem getMailItem()
+		{
 			try
 			{
 				Object explorer = Globals.ThisAddIn.Application.ActiveWindow().Selection[1];
 				if (explorer is Outlook.MailItem)
 				{
-					Outlook.MailItem mailItem = (explorer as Outlook.MailItem);
-					FormTest form = new FormTest(mailItem);
-					form.Show();
+					return (Outlook.MailItem) explorer;
 				}
-				else
-				{
-					System.Diagnostics.Debug.WriteLine("You did not select an email item");
-				}
+				System.Diagnostics.Debug.WriteLine("The item you selected was not an email item.");
+				return null;
 			}
 			catch (System.Runtime.InteropServices.COMException)
 			{
-				System.Diagnostics.Debug.WriteLine("Failed");
+				System.Windows.Forms.MessageBox.Show("You must select an Email first.");
+				return null;
 			}
+
 		}
 
-		public void OnTableButton(Office.IRibbonControl control)
+		public void OnRemoveButton(Office.IRibbonControl control)
 		{
-			// Do nothing
+			Outlook.MailItem mailItem = getMailItem();
+			if (mailItem != null)
+			{
+				if (mailItem.Categories.Contains("Phoenix archived"))
+				{
+					mailItem.Categories = mailItem.Categories.Replace("Phoenix archived", "");
+					if (mailItem.Categories != null)
+					{
+						mailItem.Categories = mailItem.Categories.Replace(",,", ",");
+					}
+				}
+				mailItem.Save();
+			}
 		}
 
 		#region Helpers

@@ -7,8 +7,8 @@
 					<button id="textButton" label="Attach"
              screentip="Text" onAction="OnTextButton"
              supertip="Inserts text at the cursor location."/>
-					<button id="tableButton" label="Insert Table"
-             screentip="Table" onAction="OnTableButton"
+					<button id="tableButton" label="Remove Selected"
+             screentip="Table" onAction="OnRemoveButton"
              supertip="Inserts a table at the cursor location."/>
 				</group>
 			</tab>
