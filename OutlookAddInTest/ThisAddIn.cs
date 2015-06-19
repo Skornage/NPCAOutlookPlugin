@@ -20,7 +20,6 @@ namespace OutlookAddInTest
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
 			this.currentExplorer = this.Application.ActiveExplorer();
-            System.Diagnostics.Debug.WriteLine("TESTTTT");
             this.currentExplorer.SelectionChange += new Outlook.ExplorerEvents_10_SelectionChangeEventHandler(Custom_CurrentExplorer_Event);
 
 			outlookNameSpace = this.Application.GetNamespace("MAPI");
@@ -41,7 +40,6 @@ namespace OutlookAddInTest
                     Object selObject = this.currentExplorer.Selection[1]; // this.Application.ActiveExplorer().Selection[1];
 					if (selObject is Outlook.MailItem)
 					{
-						System.Diagnostics.Debug.WriteLine("CHANGED");
 						this.selectedItem = (selObject as Outlook.MailItem);                    
                         if (this.selectedItem.UserProperties.Find("hasBeenSelected") == null)
                         {
@@ -60,21 +58,16 @@ namespace OutlookAddInTest
 
 		public void OnReply(object Response, ref bool Cancel)
 		{
-			System.Diagnostics.Debug.WriteLine("TESTING");
-			//((Outlook.ItemEvents_10_Event)Response).Send += new Outlook.ItemEvents_10_SendEventHandler(OnSend);
 			this.responseItem = (Outlook.MailItem)Response;
             ((Outlook.ItemEvents_10_Event)this.responseItem).Send += new Outlook.ItemEvents_10_SendEventHandler(OnSend);
-			//System.Diagnostics.Debug.WriteLine("TESTING ONREPLY");
 		}
 
 		public void OnSend(ref bool Cancel)
 		{
 			if (this.selectedItem.Categories != null) 
 			{
-                System.Diagnostics.Debug.WriteLine("categories not null");
 				if (this.selectedItem.Categories.Contains("Phoenix archived")) 
 				{
-					System.Diagnostics.Debug.WriteLine("TEst");
                     this.responseItem.Categories += "Phoenix archived";
                     this.responseItem.Save();
 				}
@@ -92,7 +85,6 @@ namespace OutlookAddInTest
 				// APICAll.archive(Item);
 				((Outlook.MailItem) Item).Categories += "Phoenix archived";
 				((Outlook.MailItem)Item).Save();
-                System.Diagnostics.Debug.WriteLine("in items_ItemAdd");
 			// }
 		}
 
