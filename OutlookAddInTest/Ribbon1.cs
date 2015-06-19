@@ -15,7 +15,6 @@ namespace OutlookAddInTest
 	public class Ribbon1 : Office.IRibbonExtensibility
 	{
 		private Office.IRibbonUI ribbon;
-		private Outlook.MailItem mailItem;
 
 		public Ribbon1()
 		{
