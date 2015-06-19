@@ -30,9 +30,11 @@ using Office = Microsoft.Office.Core;
 namespace OutlookAddInTest
 {
 	[ComVisible(true)]
+
 	public class Ribbon1 : Office.IRibbonExtensibility
 	{
 		private Office.IRibbonUI ribbon;
+		private Outlook.MailItem mailItem;
 
 		public Ribbon1()
 		{
@@ -69,21 +71,22 @@ namespace OutlookAddInTest
 
 		private Outlook.MailItem getMailItem()
 		{
-			try
-			{
-				Object explorer = Globals.ThisAddIn.Application.ActiveWindow().Selection[1];
-				if (explorer is Outlook.MailItem)
-				{
-					return (Outlook.MailItem) explorer;
-				}
-				System.Diagnostics.Debug.WriteLine("The item you selected was not an email item.");
-				return null;
-			}
-			catch (System.Runtime.InteropServices.COMException)
-			{
-				System.Windows.Forms.MessageBox.Show("You must select an Email first.");
-				return null;
-			}
+			//try
+			//{
+			//	Object explorer = Globals.ThisAddIn.Application.ActiveWindow().Selection[1];
+			//	if (explorer is Outlook.MailItem)
+			//	{
+			//		return (Outlook.MailItem) explorer;
+			//	}
+			//	System.Diagnostics.Debug.WriteLine("The item you selected was not an email item.");
+			//	return null;
+			//}
+			//catch (System.Runtime.InteropServices.COMException)
+			//{
+			//	System.Windows.Forms.MessageBox.Show("You must select an Email first.");
+			//	return null;
+			//}
+			return null;
 
 		}
 
