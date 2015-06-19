@@ -19,16 +19,17 @@ namespace OutlookAddInTest
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-			currentExplorer = this.Application.ActiveExplorer();
-			currentExplorer.SelectionChange += new Outlook.ExplorerEvents_10_SelectionChangeEventHandler(Custom_CurrentExplorer_Event);
+			this.currentExplorer = this.Application.ActiveExplorer();
+            System.Diagnostics.Debug.WriteLine("TESTTTT");
+            this.currentExplorer.SelectionChange += new Outlook.ExplorerEvents_10_SelectionChangeEventHandler(Custom_CurrentExplorer_Event);
 
 			outlookNameSpace = this.Application.GetNamespace("MAPI");
 			inbox = outlookNameSpace.GetDefaultFolder(
 					Microsoft.Office.Interop.Outlook.
 					OlDefaultFolders.olFolderInbox);
 
-			items = inbox.Items;
-			items.ItemAdd += new Outlook.ItemsEvents_ItemAddEventHandler(items_ItemAdd);
+			//items = inbox.Items;
+			//items.ItemAdd += new Outlook.ItemsEvents_ItemAddEventHandler(items_ItemAdd);
         }
 
 		private void Custom_CurrentExplorer_Event()
@@ -37,13 +38,17 @@ namespace OutlookAddInTest
 			{
 				if (this.Application.ActiveExplorer().Selection.Count > 0)
 				{
-					Object selObject = this.Application.ActiveExplorer().Selection[1];
+                    Object selObject = this.currentExplorer.Selection[1]; // this.Application.ActiveExplorer().Selection[1];
 					if (selObject is Outlook.MailItem)
 					{
 						System.Diagnostics.Debug.WriteLine("CHANGED");
-						this.selectedItem = (selObject as Outlook.MailItem);
-						((Outlook.ItemEvents_10_Event) this.selectedItem).Reply += new Outlook.ItemEvents_10_ReplyEventHandler(OnReply);
-						//this.selectedItem.
+						this.selectedItem = (selObject as Outlook.MailItem);                    
+                        if (this.selectedItem.UserProperties.Find("hasBeenSelected") == null)
+                        {
+                            ((Outlook.ItemEvents_10_Event)this.selectedItem).Reply += OnReply;
+                        }
+                        this.selectedItem.UserProperties.Add("hasBeenSelected", Outlook.OlUserPropertyType.olInteger);
+                        this.selectedItem.Save();
 					}
 				}
 			}
@@ -56,8 +61,9 @@ namespace OutlookAddInTest
 		public void OnReply(object Response, ref bool Cancel)
 		{
 			System.Diagnostics.Debug.WriteLine("TESTING");
-			((Outlook.ItemEvents_10_Event)Response).Send += new Outlook.ItemEvents_10_SendEventHandler(OnSend);
+			//((Outlook.ItemEvents_10_Event)Response).Send += new Outlook.ItemEvents_10_SendEventHandler(OnSend);
 			this.responseItem = (Outlook.MailItem)Response;
+            ((Outlook.ItemEvents_10_Event)this.responseItem).Send += new Outlook.ItemEvents_10_SendEventHandler(OnSend);
 			//System.Diagnostics.Debug.WriteLine("TESTING ONREPLY");
 		}
 
@@ -65,11 +71,18 @@ namespace OutlookAddInTest
 		{
 			if (this.selectedItem.Categories != null) 
 			{
+                System.Diagnostics.Debug.WriteLine("categories not null");
 				if (this.selectedItem.Categories.Contains("Phoenix archived")) 
 				{
 					System.Diagnostics.Debug.WriteLine("TEst");
+                    this.responseItem.Categories += "Phoenix archived";
+                    this.responseItem.Save();
 				}
-			}
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("still in the event at least");
+            }
 		}
 
 		void items_ItemAdd(object Item)
@@ -79,6 +92,7 @@ namespace OutlookAddInTest
 				// APICAll.archive(Item);
 				((Outlook.MailItem) Item).Categories += "Phoenix archived";
 				((Outlook.MailItem)Item).Save();
+                System.Diagnostics.Debug.WriteLine("in items_ItemAdd");
 			// }
 		}
 
