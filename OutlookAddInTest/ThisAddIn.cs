@@ -28,8 +28,8 @@ namespace OutlookAddInTest
 					Microsoft.Office.Interop.Outlook.
 					OlDefaultFolders.olFolderInbox);
 
-			//items = inbox.Items;
-			//items.ItemAdd += new Outlook.ItemsEvents_ItemAddEventHandler(items_ItemAdd);
+			items = inbox.Items;
+			items.ItemAdd += new Outlook.ItemsEvents_ItemAddEventHandler(items_ItemAdd);
         }
 
 		private void Custom_CurrentExplorer_Event()
