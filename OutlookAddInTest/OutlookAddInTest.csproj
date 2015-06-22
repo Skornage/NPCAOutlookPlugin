@@ -170,12 +170,6 @@
     <Compile Include="SearchForm.Designer.cs">
       <DependentUpon>SearchForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormRegion1.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="FormRegion1.Designer.cs">
-      <DependentUpon>FormRegion1.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormTest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,9 +182,6 @@
     </Compile>
     <EmbeddedResource Include="SearchForm.resx">
       <DependentUpon>SearchForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormRegion1.resx">
-      <DependentUpon>FormRegion1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormTest.resx">
       <DependentUpon>FormTest.cs</DependentUpon>
