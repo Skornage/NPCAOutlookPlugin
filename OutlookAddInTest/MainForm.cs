@@ -45,13 +45,14 @@ namespace OutlookAddInTest
 
 		private void Ok_Click(object sender, EventArgs e)
 		{
-			//DataGridViewRow row = dataGridView1.CurrentRow;
-			//using (System.IO.StreamWriter file = new System.IO.StreamWriter(System.IO.Directory.GetCurrentDirectory() + @"\Visual Studio 2013\Projects\NPCAOutlookPlugin\Output\Selections.txt", true))
-			//{
-			//	file.WriteLine(string.Format("id: {0}, type: {1}, name: {2}, email: {3}, info: {4}. Time: {5}",
-			//	row.Cells["id"].Value, row.Cells["type"].Value, row.Cells["name"].Value, row.Cells["email"].Value,
-			//	row.Cells["info"].Value, DateTime.Now));
-			//}
+			DataGridViewRow row = dataGridView1.CurrentRow;
+
+            var id = row.Cells["id"];
+            StringBuilder sb = new StringBuilder();
+            String sentBy = mailItem.SenderEmailAddress;
+            Outlook.Recipients recipients = mailItem.Recipients;
+            String subj = mailItem.Subject;
+            String body = mailItem.Body;
 
             //API.Archive();
             mailItem.MessageClass = "IPM.Note.Phoenix";
