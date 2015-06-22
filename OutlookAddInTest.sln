@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.40418.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutlookAddInTest", "OutlookAddInTest\OutlookAddInTest.csproj", "{7994C109-ED44-4742-A63F-CB5CED33303C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoenixArchiveTool", "OutlookAddInTest\PhoenixArchiveTool.csproj", "{7994C109-ED44-4742-A63F-CB5CED33303C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

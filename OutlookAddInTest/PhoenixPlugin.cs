@@ -8,7 +8,7 @@ using Office = Microsoft.Office.Core;
 
 namespace OutlookAddInTest
 {
-    public partial class ThisAddIn
+    public partial class PhoenixPlugin
     {
 		private Outlook.NameSpace outlookNameSpace;
 		private Outlook.MAPIFolder inbox;
@@ -101,7 +101,7 @@ namespace OutlookAddInTest
 
 		protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject()
 		{
-			return new Ribbon1();
+			return new MainRibbon();
 		}
 
         #region VSTO generated code

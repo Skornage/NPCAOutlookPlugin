@@ -13,8 +13,8 @@ namespace OutlookAddInTest
     
     public partial class SearchForm : Form
     {
-        FormTest form;
-        public SearchForm(FormTest form)
+        MainForm form;
+        public SearchForm(MainForm form)
         {
             this.form = form;
             InitializeComponent();

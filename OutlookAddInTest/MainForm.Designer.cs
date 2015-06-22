@@ -1,6 +1,6 @@
 ﻿namespace OutlookAddInTest
 {
-	partial class FormTest
+	partial class MainForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -30,6 +30,7 @@
 		{
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.Cancel = new System.Windows.Forms.Button();
             this.Ok = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -120,7 +121,7 @@
             // 
             // jsonTestBindingSource
             // 
-            this.jsonTestBindingSource.DataSource = typeof(OutlookAddInTest.JsonTest);
+            this.jsonTestBindingSource.DataSource = typeof(OutlookAddInTest.JsonGetter);
             // 
             // FormTest
             // 
@@ -134,6 +135,7 @@
             this.Controls.Add(this.Ok);
             this.Controls.Add(this.Cancel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormTest";
             this.Text = "FormTest";
             this.Load += new System.EventHandler(this.FormTest_Load);

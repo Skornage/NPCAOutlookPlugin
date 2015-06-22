@@ -46,3 +46,4 @@ C:\Users\greenjm\Documents\Visual Studio 2013\Projects\NPCAOutlookPlugin\Outlook
 C:\Users\greenjm\Documents\Visual Studio 2013\Projects\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInTest.dll
 C:\Users\greenjm\Documents\Visual Studio 2013\Projects\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInTest.pdb
 C:\Users\greenjm\Documents\Visual Studio 2013\Projects\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInTest.FormRegion1.resources
+C:\Users\greenjm\Documents\Visual Studio 2013\Projects\NPCAOutlookPlugin\OutlookAddInTest\obj\Debug\OutlookAddInTest.csprojResolveAssemblyReference.cache

@@ -7,7 +7,7 @@ using Outlook = Microsoft.Office.Interop.Outlook;
 
 namespace OutlookAddInTest
 {
-    partial class FormRegion1
+    partial class PhoenixFormRegion
     {
         #region Form Region Factory
 

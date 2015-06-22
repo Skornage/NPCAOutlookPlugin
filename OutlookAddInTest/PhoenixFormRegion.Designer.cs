@@ -1,9 +1,9 @@
 ﻿namespace OutlookAddInTest
 {
     [System.ComponentModel.ToolboxItemAttribute(false)]
-    partial class FormRegion1 : Microsoft.Office.Tools.Outlook.FormRegionBase
+    partial class PhoenixFormRegion : Microsoft.Office.Tools.Outlook.FormRegionBase
     {
-        public FormRegion1(Microsoft.Office.Interop.Outlook.FormRegion formRegion)
+        public PhoenixFormRegion(Microsoft.Office.Interop.Outlook.FormRegion formRegion)
             : base(Globals.Factory, formRegion)
         {
             this.InitializeComponent();
@@ -57,7 +57,7 @@
         /// </summary>
         private static void InitializeManifest(Microsoft.Office.Tools.Outlook.FormRegionManifest manifest, Microsoft.Office.Tools.Outlook.Factory factory)
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRegion1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PhoenixFormRegion));
             manifest.ExactMessageClass = true;
             manifest.FormRegionName = "FormRegion1";
             manifest.FormRegionType = Microsoft.Office.Tools.Outlook.FormRegionType.Replacement;
@@ -91,7 +91,7 @@
             public FormRegion1Factory()
             {
                 this._Manifest = Globals.Factory.CreateFormRegionManifest();
-                FormRegion1.InitializeManifest(this._Manifest, Globals.Factory);
+                PhoenixFormRegion.InitializeManifest(this._Manifest, Globals.Factory);
                 this.FormRegionInitializing += new Microsoft.Office.Tools.Outlook.FormRegionInitializingEventHandler(this.FormRegion1Factory_FormRegionInitializing);
             }
 
@@ -107,7 +107,7 @@
             [System.Diagnostics.DebuggerNonUserCodeAttribute()]
             Microsoft.Office.Tools.Outlook.IFormRegion Microsoft.Office.Tools.Outlook.IFormRegionFactory.CreateFormRegion(Microsoft.Office.Interop.Outlook.FormRegion formRegion)
             {
-                FormRegion1 form = new FormRegion1(formRegion);
+                PhoenixFormRegion form = new PhoenixFormRegion(formRegion);
                 form.Factory = this;
                 return form;
             }
@@ -146,14 +146,14 @@
 
     partial class WindowFormRegionCollection
     {
-        internal FormRegion1 FormRegion1
+        internal PhoenixFormRegion FormRegion1
         {
             get
             {
                 foreach (var item in this)
                 {
-                    if (item.GetType() == typeof(FormRegion1))
-                        return (FormRegion1)item;
+                    if (item.GetType() == typeof(PhoenixFormRegion))
+                        return (PhoenixFormRegion)item;
                 }
                 return null;
             }

@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 
 namespace OutlookAddInTest
 {
-	class JsonTest
+	class JsonGetter
 	{
 		public static JObject getJsonObject()
 		{

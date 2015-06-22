@@ -12,12 +12,12 @@ using Newtonsoft.Json.Linq;
 
 namespace OutlookAddInTest
 {
-	public partial class FormTest : Form
+	public partial class MainForm : Form
 	{
 		private Outlook.MailItem mailItem;
         DataTable dt = new DataTable();
         BindingSource bs = new BindingSource();
-		public FormTest(Outlook.MailItem mailItem)
+		public MainForm(Outlook.MailItem mailItem)
 		{
 			this.mailItem = mailItem;
 			InitializeComponent();
@@ -72,13 +72,9 @@ namespace OutlookAddInTest
 
 		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
 		{
-            if (comboBox1.SelectedIndex == 1)
+            if (comboBox1.SelectedIndex != 0)
             {
-                dt.DefaultView.RowFilter = "type = 'Account'";
-            }
-            else if (comboBox1.SelectedIndex == 2)
-            {
-                dt.DefaultView.RowFilter = "type = 'Contact'";
+                dt.DefaultView.RowFilter = string.Format("type = '{0}' AND name LIKE '%{1}%'", comboBox1.SelectedItem, textBox1.Text);
             }
             else
             {
@@ -94,7 +90,7 @@ namespace OutlookAddInTest
             dt.Columns.Add("email", typeof(String));
             dt.Columns.Add("info", typeof(String));
 
-            JObject dynJson = JsonTest.getJsonObject();
+            JObject dynJson = JsonGetter.getJsonObject();
             foreach (KeyValuePair<String, JToken> item in dynJson)
             {
                 String[] line = {(String) item.Value["id"], (String) item.Value["type"],

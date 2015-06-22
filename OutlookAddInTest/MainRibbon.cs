@@ -12,11 +12,11 @@ namespace OutlookAddInTest
 {
 	[ComVisible(true)]
 
-	public class Ribbon1 : Office.IRibbonExtensibility
+	public class MainRibbon : Office.IRibbonExtensibility
 	{
 		private Office.IRibbonUI ribbon;
 
-		public Ribbon1()
+		public MainRibbon()
 		{
 		}
 
@@ -43,7 +43,7 @@ namespace OutlookAddInTest
 			Outlook.MailItem item = getMailItem();
 			if (item != null)
 			{
-				FormTest form = new FormTest(item);
+				MainForm form = new MainForm(item);
 				form.Show();
 			}
 		}
@@ -52,7 +52,7 @@ namespace OutlookAddInTest
 		{
 			try
 			{
-				Object explorer = Globals.ThisAddIn.Application.ActiveWindow().Selection[1];
+				Object explorer = Globals.PhoenixPlugin.Application.ActiveWindow().Selection[1];
 				if (explorer is Outlook.MailItem)
 				{
 					return (Outlook.MailItem)explorer;

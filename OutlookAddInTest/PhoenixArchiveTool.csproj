@@ -164,11 +164,11 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="FormRegion1.cs">
+    <Compile Include="PhoenixFormRegion.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="FormRegion1.Designer.cs">
-      <DependentUpon>FormRegion1.cs</DependentUpon>
+    <Compile Include="PhoenixFormRegion.Designer.cs">
+      <DependentUpon>PhoenixFormRegion.cs</DependentUpon>
     </Compile>
     <Compile Include="SearchForm.cs">
       <SubType>Form</SubType>
@@ -176,24 +176,24 @@
     <Compile Include="SearchForm.Designer.cs">
       <DependentUpon>SearchForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormTest.cs">
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormTest.Designer.cs">
-      <DependentUpon>FormTest.cs</DependentUpon>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="JsonTest.cs" />
+    <Compile Include="JsonGetter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <EmbeddedResource Include="FormRegion1.resx">
-      <DependentUpon>FormRegion1.cs</DependentUpon>
+    <EmbeddedResource Include="PhoenixFormRegion.resx">
+      <DependentUpon>PhoenixFormRegion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SearchForm.resx">
       <DependentUpon>SearchForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormTest.resx">
-      <DependentUpon>FormTest.cs</DependentUpon>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -215,15 +215,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Ribbon1.cs" />
-    <Compile Include="ThisAddIn.cs">
+    <Compile Include="MainRibbon.cs" />
+    <Compile Include="PhoenixPlugin.cs">
       <SubType>Code</SubType>
     </Compile>
-    <None Include="ThisAddIn.Designer.xml">
-      <DependentUpon>ThisAddIn.cs</DependentUpon>
+    <None Include="PhoenixPlugin.Designer.xml">
+      <DependentUpon>PhoenixPlugin.cs</DependentUpon>
     </None>
-    <Compile Include="ThisAddIn.Designer.cs">
-      <DependentUpon>ThisAddIn.Designer.xml</DependentUpon>
+    <Compile Include="PhoenixPlugin.Designer.cs">
+      <DependentUpon>PhoenixPlugin.Designer.xml</DependentUpon>
     </Compile>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
@@ -262,7 +262,7 @@
       <FlavorProperties GUID="{BAA0C2D2-18E2-41B9-852F-F413020CAA33}">
         <ProjectProperties HostName="Outlook" HostPackage="{29A7B9D7-A7F1-4328-8EF0-6B2D1A56B2C1}" OfficeVersion="15.0" VstxVersion="4.0" ApplicationType="Outlook" Language="cs" TemplatesPath="" DebugInfoExeName="#Software\Microsoft\Office\15.0\Outlook\InstallRoot\Path#outlook.exe" AddItemTemplatesGuid="{A58A78EB-1C92-4DDD-80CF-E8BD872ABFC4}" />
         <Host Name="Outlook" GeneratedCodeNamespace="OutlookAddInTest" IconIndex="0">
-          <HostItem Name="ThisAddIn" Code="ThisAddIn.cs" CanonicalName="AddIn" CanActivate="false" IconIndex="1" Blueprint="ThisAddIn.Designer.xml" GeneratedCode="ThisAddIn.Designer.cs" />
+          <HostItem Name="ThisAddIn" Code="PhoenixPlugin.cs" CanonicalName="AddIn" CanActivate="false" IconIndex="1" Blueprint="PhoenixPlugin.Designer.xml" GeneratedCode="PhoenixPlugin.Designer.cs" />
         </Host>
       </FlavorProperties>
     </VisualStudio>
