@@ -236,6 +236,9 @@
   <ItemGroup>
     <None Include="Properties\Icon\download.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\favicons\apple-touch-icon.png" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

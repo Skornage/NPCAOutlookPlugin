@@ -28,6 +28,18 @@ namespace OutlookAddInTest
 					OlDefaultFolders.olFolderInbox);
 
 			items = inbox.Items;
+            foreach (object item in items)
+            {
+                if (item is Outlook.MailItem)
+                {
+                    Outlook.MailItem mailItem = item as Outlook.MailItem;
+                    if (mailItem.UserProperties.Count > 0)
+                    {
+                        mailItem.UserProperties.Remove(1);
+                        mailItem.Save();
+                    }
+                }
+            }
 			items.ItemAdd += new Outlook.ItemsEvents_ItemAddEventHandler(items_ItemAdd);
         }
 
@@ -40,7 +52,7 @@ namespace OutlookAddInTest
                     Object selObject = this.currentExplorer.Selection[1];
 					if (selObject is Outlook.MailItem)
 					{
-						this.selectedItem = (selObject as Outlook.MailItem);                    
+						this.selectedItem = (selObject as Outlook.MailItem);
                         if (this.selectedItem.UserProperties.Find("hasBeenSelected") == null)
                         {
                             ((Outlook.ItemEvents_10_Event)this.selectedItem).Reply += OnReply;

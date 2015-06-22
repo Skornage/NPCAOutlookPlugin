@@ -75,6 +75,7 @@ namespace OutlookAddInTest
 			{
                 //API.Remove();
                 mailItem.MessageClass = "IPM.Note";
+                mailItem.UserProperties.Remove(1);
 				mailItem.Save();
 			}
 		}

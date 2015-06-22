@@ -64,7 +64,7 @@
             manifest.Icons.Default = ((System.Drawing.Icon)(resources.GetObject("FormRegion1.Manifest.Icons.Default")));
             manifest.Icons.Encrypted = ((System.Drawing.Icon)(resources.GetObject("FormRegion1.Manifest.Icons.Encrypted")));
             manifest.Icons.Forwarded = ((System.Drawing.Icon)(resources.GetObject("FormRegion1.Manifest.Icons.Forwarded")));
-            manifest.Icons.Page = global::OutlookAddInTest.Properties.Resources.download;
+            manifest.Icons.Page = global::OutlookAddInTest.Properties.Resources.apple_touch_icon;
             manifest.Icons.Read = ((System.Drawing.Icon)(resources.GetObject("FormRegion1.Manifest.Icons.Read")));
             manifest.Icons.Recurring = ((System.Drawing.Icon)(resources.GetObject("FormRegion1.Manifest.Icons.Recurring")));
             manifest.Icons.Replied = ((System.Drawing.Icon)(resources.GetObject("FormRegion1.Manifest.Icons.Replied")));
