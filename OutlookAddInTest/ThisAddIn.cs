@@ -37,7 +37,7 @@ namespace OutlookAddInTest
 			{
 				if (this.Application.ActiveExplorer().Selection.Count > 0)
 				{
-                    Object selObject = this.currentExplorer.Selection[1]; // this.Application.ActiveExplorer().Selection[1];
+                    Object selObject = this.currentExplorer.Selection[1];
 					if (selObject is Outlook.MailItem)
 					{
 						this.selectedItem = (selObject as Outlook.MailItem);                    
@@ -64,26 +64,21 @@ namespace OutlookAddInTest
 
 		public void OnSend(ref bool Cancel)
 		{
-			if (this.selectedItem.Categories != null) 
+            //Check if selected item is archived (probably an API call to be safe)
+			if (this.selectedItem.MessageClass.Equals("IPM.Note.Phoenix")) 
 			{
-				if (this.selectedItem.Categories.Contains("Phoenix archived")) 
-				{
-                    this.responseItem.Categories += "Phoenix archived";
-                    this.responseItem.Save();
-				}
+				this.responseItem.MessageClass = "IPM.Note.Phoenix";
+                this.responseItem.Save();
             }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine("still in the event at least");
-            }
-		}
+        }
+		
 
 		void items_ItemAdd(object Item)
 		{
 			// if (APICall.isArchived(Item) 
 			// {
 				// APICAll.archive(Item);
-				((Outlook.MailItem) Item).Categories += "Phoenix archived";
+				((Outlook.MailItem) Item).MessageClass = "IPM.Note.Phoenix";
 				((Outlook.MailItem)Item).Save();
 			// }
 		}

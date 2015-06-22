@@ -57,7 +57,7 @@ namespace OutlookAddInTest
 				{
 					return (Outlook.MailItem)explorer;
 				}
-				System.Diagnostics.Debug.WriteLine("The item you selected was not an email item.");
+				System.Windows.Forms.MessageBox.Show("The item you selected was not an email item.");
 				return null;
 			}
 			catch (System.Runtime.InteropServices.COMException)
@@ -70,19 +70,11 @@ namespace OutlookAddInTest
 		public void OnRemoveButton(Office.IRibbonControl control)
 		{
 			Outlook.MailItem mailItem = getMailItem();
+                      
 			if (mailItem != null)
 			{
-				if (mailItem.Categories != null)
-				{
-					if (mailItem.Categories.Contains("Phoenix archived"))
-					{
-						mailItem.Categories = mailItem.Categories.Replace("Phoenix archived", "");
-						if (mailItem.Categories != null)
-						{
-							mailItem.Categories = mailItem.Categories.Replace(",,", ",");
-						}
-					}
-				}
+                //API.Remove();
+                mailItem.MessageClass = "IPM.Note";
 				mailItem.Save();
 			}
 		}

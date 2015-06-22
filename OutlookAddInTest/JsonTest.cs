@@ -9,21 +9,7 @@ namespace OutlookAddInTest
 {
 	class JsonTest
 	{
-		public static String getJsonObject()
-		{
-            
-
-			return Newtonsoft.Json.JsonConvert.SerializeObject(new
-			{
-				results = new List<Result>()
-				{
-					new Result { id = 1, type = "Account", name = "NPCA", email = "ABC", info = "ABC" },
-					new Result { id = 2, type = "Contact", name = "Blah", email = "JKL", info = "JKL" }
-				}
-			});
-		}
-
-		public static JObject getJsonObjectTwo()
+		public static JObject getJsonObject()
 		{
 			return JObject.Parse(@"
 			{

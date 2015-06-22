@@ -21,17 +21,9 @@ namespace OutlookAddInTest
 		{
 			this.mailItem = mailItem;
 			InitializeComponent();
-            DisplayAccountInformation(Globals.ThisAddIn.Application);
             populateDataGrid(0);
 			comboBox1.SelectedIndex = 0;
             textBox1.TextChanged += new EventHandler(searchTextChanged);
-
-			Outlook.Categories categories = mailItem.Application.Session.Categories;
-			if (!CategoryExists("Phoenix archived"))
-			{
-				Outlook.Category category = categories.Add("Phoenix archived",
-					Outlook.OlCategoryColor.olCategoryColorDarkBlue);
-			}
 		}
 
         private void searchTextChanged(object sender, EventArgs e)
@@ -61,14 +53,9 @@ namespace OutlookAddInTest
 			//	row.Cells["info"].Value, DateTime.Now));
 			//}
 
-			if (mailItem.Categories == null)
-			{
-				mailItem.Categories = "Phoenix archived";
-			}
-			else if (!mailItem.Categories.Contains("Phoenix archived"))
-			{
-				mailItem.Categories += ", Phoenix archived";
-			}
+            //API.Archive();
+            mailItem.MessageClass = "IPM.Note.Phoenix";
+            mailItem.UserProperties.Remove(1);
 			mailItem.Save();
 			this.Close();
 		}
@@ -107,7 +94,7 @@ namespace OutlookAddInTest
             dt.Columns.Add("email", typeof(String));
             dt.Columns.Add("info", typeof(String));
 
-            JObject dynJson = JsonTest.getJsonObjectTwo();
+            JObject dynJson = JsonTest.getJsonObject();
             foreach (KeyValuePair<String, JToken> item in dynJson)
             {
                 String[] line = {(String) item.Value["id"], (String) item.Value["type"],
@@ -146,22 +133,22 @@ namespace OutlookAddInTest
 
 		}
 
-        public static void DisplayAccountInformation(Outlook.Application application)
-        {
-            Outlook.Accounts accounts = application.Session.Accounts;
-            StringBuilder builder = new StringBuilder();
+        //public static void DisplayAccountInformation(Outlook.Application application)
+        //{
+        //    Outlook.Accounts accounts = application.Session.Accounts;
+        //    StringBuilder builder = new StringBuilder();
 
-            foreach (Outlook.Account account in accounts)
-            {
-                builder.AppendFormat("DisplayName: {0}\n", account.DisplayName);
-                builder.AppendFormat("UserName: {0}\n", account.UserName);
-                builder.AppendFormat("SmtpAddress: {0}\n", account.SmtpAddress);
-                builder.Append("AccountType: ");
-                builder.AppendLine();
-            }
+        //    foreach (Outlook.Account account in accounts)
+        //    {
+        //        builder.AppendFormat("DisplayName: {0}\n", account.DisplayName);
+        //        builder.AppendFormat("UserName: {0}\n", account.UserName);
+        //        builder.AppendFormat("SmtpAddress: {0}\n", account.SmtpAddress);
+        //        builder.Append("AccountType: ");
+        //        builder.AppendLine();
+        //    }
 
-            // Display the account information.
-            System.Windows.Forms.MessageBox.Show(builder.ToString());
-        }
+        //    // Display the account information.
+        //    System.Windows.Forms.MessageBox.Show(builder.ToString());
+        //}
     }
 }

@@ -164,6 +164,12 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="FormRegion1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FormRegion1.Designer.cs">
+      <DependentUpon>FormRegion1.cs</DependentUpon>
+    </Compile>
     <Compile Include="SearchForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -180,6 +186,9 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <EmbeddedResource Include="FormRegion1.resx">
+      <DependentUpon>FormRegion1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SearchForm.resx">
       <DependentUpon>SearchForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -194,6 +203,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="OutlookAddInTest_TemporaryKey.pfx" />
     <None Include="packages.config" />
@@ -222,6 +232,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\DataSources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Icon\download.jpg" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
