@@ -12,7 +12,7 @@ namespace OutlookAddInTest
         #region Form Region Factory
 
         [Microsoft.Office.Tools.Outlook.FormRegionMessageClass("IPM.Note.Phoenix")]
-        [Microsoft.Office.Tools.Outlook.FormRegionName("OutlookAddInTest.FormRegion1")]
+        [Microsoft.Office.Tools.Outlook.FormRegionName("PhoenixArchiveTool.FormRegion1")]
         public partial class FormRegion1Factory
         {
             // Occurs before the form region is initialized.

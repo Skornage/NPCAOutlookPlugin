@@ -38,9 +38,10 @@
             // 
             // FormRegion1
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "FormRegion1";
-            this.Size = new System.Drawing.Size(669, 45);
+            this.Size = new System.Drawing.Size(624, 76);
             this.FormRegionShowing += new System.EventHandler(this.FormRegion1_FormRegionShowing);
             this.FormRegionClosed += new System.EventHandler(this.FormRegion1_FormRegionClosed);
             this.ResumeLayout(false);
@@ -58,8 +59,7 @@
         private static void InitializeManifest(Microsoft.Office.Tools.Outlook.FormRegionManifest manifest, Microsoft.Office.Tools.Outlook.Factory factory)
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PhoenixFormRegion));
-            manifest.ExactMessageClass = true;
-            manifest.FormRegionName = "FormRegion1";
+            manifest.FormRegionName = "NewPhoenixRegion";
             manifest.FormRegionType = Microsoft.Office.Tools.Outlook.FormRegionType.Replacement;
             manifest.Icons.Default = ((System.Drawing.Icon)(resources.GetObject("FormRegion1.Manifest.Icons.Default")));
             manifest.Icons.Encrypted = ((System.Drawing.Icon)(resources.GetObject("FormRegion1.Manifest.Icons.Encrypted")));
@@ -73,9 +73,9 @@
             manifest.Icons.Unread = ((System.Drawing.Icon)(resources.GetObject("FormRegion1.Manifest.Icons.Unread")));
             manifest.Icons.Unsent = ((System.Drawing.Icon)(resources.GetObject("FormRegion1.Manifest.Icons.Unsent")));
             manifest.Icons.Window = ((System.Drawing.Icon)(resources.GetObject("FormRegion1.Manifest.Icons.Window")));
-            manifest.ShowInspectorCompose = false;
             manifest.ShowInspectorRead = false;
-            manifest.Title = "FormRegion1";
+            manifest.ShowReadingPane = false;
+            manifest.Title = "NewPhoenixRegion";
 
         }
 
