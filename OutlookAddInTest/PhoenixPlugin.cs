@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml.Linq;
 using Outlook = Microsoft.Office.Interop.Outlook;
 using Office = Microsoft.Office.Core;
+using System.Collections;
 
 namespace OutlookAddInTest
 {
@@ -16,6 +17,7 @@ namespace OutlookAddInTest
 		private Outlook.MailItem selectedItem;
 		private Outlook.MailItem responseItem;
 		private Outlook.Explorer currentExplorer = null;
+        private ArrayList previouslySelected = new ArrayList();
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
@@ -28,18 +30,6 @@ namespace OutlookAddInTest
 					OlDefaultFolders.olFolderInbox);
 
 			items = inbox.Items;
-            foreach (object item in items)
-            {
-                if (item is Outlook.MailItem)
-                {
-                    Outlook.MailItem mailItem = item as Outlook.MailItem;
-                    if (mailItem.UserProperties.Count > 0)
-                    {
-                        mailItem.UserProperties.Remove(1);
-                        mailItem.Save();
-                    }
-                }
-            }
 			items.ItemAdd += new Outlook.ItemsEvents_ItemAddEventHandler(items_ItemAdd);
         }
 
@@ -53,11 +43,11 @@ namespace OutlookAddInTest
 					if (selObject is Outlook.MailItem)
 					{
 						this.selectedItem = (selObject as Outlook.MailItem);
-                        if (this.selectedItem.UserProperties.Find("hasBeenSelected") == null)
+                        if (!previouslySelected.Contains(this.selectedItem))
                         {
                             ((Outlook.ItemEvents_10_Event)this.selectedItem).Reply += OnReply;
+                            previouslySelected.Add(this.selectedItem);
                         }
-                        this.selectedItem.UserProperties.Add("hasBeenSelected", Outlook.OlUserPropertyType.olInteger);
                         this.selectedItem.Save();
 					}
 				}
