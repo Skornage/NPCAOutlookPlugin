@@ -56,7 +56,6 @@ namespace OutlookAddInTest
 
             //API.Archive();
             mailItem.MessageClass = "IPM.Note.Phoenix";
-            mailItem.UserProperties.Remove(1);
 			mailItem.Save();
 			this.Close();
 		}
