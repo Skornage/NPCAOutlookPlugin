@@ -30,7 +30,6 @@ namespace OutlookAddInTest
 					OlDefaultFolders.olFolderInbox);
 
 			items = inbox.Items;
-			items.ItemAdd += new Outlook.ItemsEvents_ItemAddEventHandler(items_ItemAdd);
         }
 
 		private void Custom_CurrentExplorer_Event()
@@ -73,17 +72,6 @@ namespace OutlookAddInTest
                 this.responseItem.Save();
             }
         }
-		
-
-		void items_ItemAdd(object Item)
-		{
-			// if (APICall.isArchived(Item) 
-			// {
-				// APICAll.archive(Item);
-				((Outlook.MailItem) Item).MessageClass = "IPM.Note.Phoenix";
-				((Outlook.MailItem)Item).Save();
-			// }
-		}
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
