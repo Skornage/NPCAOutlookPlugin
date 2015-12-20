@@ -37,11 +37,11 @@
 			this.button3 = new System.Windows.Forms.Button();
 			this.comboBox1 = new System.Windows.Forms.ComboBox();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
-			this.jsonTestBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+			this.jsonTestBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.jsonTestBindingSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.jsonTestBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// Cancel
@@ -140,11 +140,12 @@
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximumSize = new System.Drawing.Size(662, 488);
 			this.Name = "MainForm";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Phoenix";
 			this.Load += new System.EventHandler(this.FormTest_Load);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.jsonTestBindingSource)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.jsonTestBindingSource)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
