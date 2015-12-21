@@ -8,15 +8,15 @@ namespace OutlookAddInTest
 {
 	public class ArchiveEmailAttachment
 	{
-		public String fileName { get; set; }
-		public String mediaTypeName { get; set; }
-		public byte[] content { get; set; }
+		public String FileName { get; set; }
+		public String MediaTypeName { get; set; }
+		public byte[] Content { get; set; }
 
 		public ArchiveEmailAttachment(String fileName, String mediaTypeName, byte[] content)
 		{
-			this.fileName = fileName;
-			this.mediaTypeName  = mediaTypeName;
-			this.content = content;
+			this.FileName = fileName;
+			this.MediaTypeName  = mediaTypeName;
+			this.Content = content;
 		}
 	}
 }
