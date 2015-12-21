@@ -11,6 +11,8 @@ using Outlook = Microsoft.Office.Interop.Outlook;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IO;
+using System.Net;
+using System.Net.Http;
 
 namespace OutlookAddInTest
 {
@@ -19,6 +21,7 @@ namespace OutlookAddInTest
 		private Outlook.MailItem mailItem;
         DataTable dt = new DataTable();
         BindingSource bs = new BindingSource();
+		List<Result> results = JsonGetter.GetData();
 		public MainForm(Outlook.MailItem mailItem)
 		{
 			this.mailItem = mailItem;
@@ -47,10 +50,9 @@ namespace OutlookAddInTest
 
 		private void Ok_Click(object sender, EventArgs e)
 		{
-			//TODO: Get entity ID and entry ID, create HTTP Put request
+
 			DataGridViewRow row = dataGridView1.CurrentRow;
 
-            var id = row.Cells["id"];
 			DateTime whenReceivedUtc = mailItem.ReceivedTime.ToUniversalTime();
 			String fromDisplayName = mailItem.SenderName;
 			String fromEmailAddress = mailItem.SenderEmailAddress;
@@ -71,9 +73,9 @@ namespace OutlookAddInTest
 				byte[] content = attachment.PropertyAccessor.GetProperty(PR_ATTACH_DATA_BIN);
 				archAttachment = new ArchiveEmailAttachment(fileName, mediaTypeName, content);
 				toArchive.addAttachment(archAttachment);
-			}			
+			}
 
-            //API.Archive();
+			archiveEmail(toArchive, row);
             mailItem.MessageClass = "IPM.Note.Phoenix";
 			mailItem.Save();
 			this.Close();
@@ -108,7 +110,6 @@ namespace OutlookAddInTest
 			dt.Columns.Add("email", typeof(String));
 			dt.Columns.Add("type", typeof(String));
 
-			List<Result> results = JsonGetter.GetData();
 			foreach (Result item in results)
 			{
 				String type = "";
@@ -152,22 +153,31 @@ namespace OutlookAddInTest
 
 		}
 
-        //public static void DisplayAccountInformation(Outlook.Application application)
-        //{
-        //    Outlook.Accounts accounts = application.Session.Accounts;
-        //    StringBuilder builder = new StringBuilder();
+		private void archiveEmail(ArchiveEmailItem email, DataGridViewRow row)
+		{
+			var id = row.Cells["id"];
+			String entityId = "";
+			foreach (Result item in results)
+			{
+				if (item.idNumber.Equals(id))
+				{
+					entityId = item.id;
+					break;
+				}
+			}
+			String entryId = mailItem.EntryID;
+			String emailJson = JsonConvert.SerializeObject(email);
+			String url = "http://phoenix-dev.azurewebsites.net/api/v1/outlook/archived-emails/"
+					+ entityId + "/" + entryId + "?apiToken=MUg@R*A8jgtwY$aQXv3J";
 
-        //    foreach (Outlook.Account account in accounts)
-        //    {
-        //        builder.AppendFormat("DisplayName: {0}\n", account.DisplayName);
-        //        builder.AppendFormat("UserName: {0}\n", account.UserName);
-        //        builder.AppendFormat("SmtpAddress: {0}\n", account.SmtpAddress);
-        //        builder.Append("AccountType: ");
-        //        builder.AppendLine();
-        //    }
-
-        //    // Display the account information.
-        //    System.Windows.Forms.MessageBox.Show(builder.ToString());
-        //}
+			var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+			httpWebRequest.ContentType = "application/json";
+			httpWebRequest.Method = "PUT";
+			using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+			{
+				streamWriter.Write(emailJson);
+			}
+			//var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+		}
     }
 }
