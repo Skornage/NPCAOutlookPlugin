@@ -164,6 +164,8 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="ArchiveEmailAttachment.cs" />
+    <Compile Include="ArchiveEmailItem.cs" />
     <Compile Include="PhoenixFormRegion.cs">
       <SubType>UserControl</SubType>
     </Compile>

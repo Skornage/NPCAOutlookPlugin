@@ -8,7 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Outlook = Microsoft.Office.Interop.Outlook;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace OutlookAddInTest
 {
@@ -45,14 +47,31 @@ namespace OutlookAddInTest
 
 		private void Ok_Click(object sender, EventArgs e)
 		{
+			//TODO: Get entity ID and entry ID, create HTTP Put request
 			DataGridViewRow row = dataGridView1.CurrentRow;
 
             var id = row.Cells["id"];
-            StringBuilder sb = new StringBuilder();
-            String sentBy = mailItem.SenderEmailAddress;
-            Outlook.Recipients recipients = mailItem.Recipients;
-            String subj = mailItem.Subject;
-            String body = mailItem.Body;
+			DateTime whenReceivedUtc = mailItem.ReceivedTime.ToUniversalTime();
+			String fromDisplayName = mailItem.SenderName;
+			String fromEmailAddress = mailItem.SenderEmailAddress;
+			String subject = mailItem.Subject;
+			String body = mailItem.HTMLBody;
+			bool isBodyHtml = true;
+
+			ArchiveEmailItem toArchive = new ArchiveEmailItem(whenReceivedUtc, fromDisplayName, fromEmailAddress,
+				subject, body, isBodyHtml);
+
+			//Get Attachments
+			const string PR_ATTACH_DATA_BIN =
+                "http://schemas.microsoft.com/mapi/proptag/0x37010102";
+			ArchiveEmailAttachment archAttachment;
+			foreach (Outlook.Attachment attachment in mailItem.Attachments) {
+				String fileName = attachment.FileName;
+				String mediaTypeName = attachment.Type.ToString();
+				byte[] content = attachment.PropertyAccessor.GetProperty(PR_ATTACH_DATA_BIN);
+				archAttachment = new ArchiveEmailAttachment(fileName, mediaTypeName, content);
+				toArchive.addAttachment(archAttachment);
+			}			
 
             //API.Archive();
             mailItem.MessageClass = "IPM.Note.Phoenix";

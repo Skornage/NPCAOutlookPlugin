@@ -11,6 +11,7 @@ namespace OutlookAddInTest
 	{
 		public static JObject getJsonObject()
 		{
+			//getting companyID, id, type, name, email
 			return JObject.Parse(@"
 			{
 				""jagged"":
