@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.ComponentModel;
 using Outlook = Microsoft.Office.Interop.Outlook;
 using Office = Microsoft.Office.Core;
 
@@ -15,6 +16,8 @@ namespace OutlookAddInTest
 	public class MainRibbon : Office.IRibbonExtensibility
 	{
 		private Office.IRibbonUI ribbon;
+		private MainForm CompaniesAndContacts;
+		private LoadingForm loadingForm;
 
 		public MainRibbon()
 		{
@@ -43,9 +46,37 @@ namespace OutlookAddInTest
 			Outlook.MailItem item = getMailItem();
 			if (item != null)
 			{
-				MainForm form = new MainForm(item);
-				form.Show();
+				loadingForm = new LoadingForm();
+				loadingForm.Show();
+
+				BackgroundWorker bw = new BackgroundWorker();
+				bw.DoWork += new DoWorkEventHandler(bw_DoWork);
+				bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
+
+				try
+				{
+					bw.RunWorkerAsync();
+					loadingForm.Show();
+				}
+				catch (Exception ex)
+				{
+					System.Diagnostics.Debug.WriteLine(ex.ToString());
+				}
 			}
+		}
+
+		void bw_DoWork(object sender, DoWorkEventArgs e)
+		{
+			Outlook.MailItem item = getMailItem();
+			if (item != null)
+			{
+				CompaniesAndContacts = new MainForm(item);
+			}
+		}
+		void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+		{
+			loadingForm.Close();
+			CompaniesAndContacts.Show();
 		}
 
 		private Outlook.MailItem getMailItem()

@@ -23,7 +23,7 @@ namespace OutlookAddInTest
 		{
 			this.mailItem = mailItem;
 			InitializeComponent();
-            populateDataGrid(0);
+			populateDataGrid(0);
 			comboBox1.SelectedIndex = 0;
             textBox1.TextChanged += new EventHandler(searchTextChanged);
 		}
@@ -104,18 +104,22 @@ namespace OutlookAddInTest
         private void populateDataGrid(int index)
         {
             dt.Columns.Add("id", typeof(String));
-            dt.Columns.Add("type", typeof(String));
             dt.Columns.Add("name", typeof(String));
-            dt.Columns.Add("email", typeof(String));
-            dt.Columns.Add("info", typeof(String));
+			dt.Columns.Add("email", typeof(String));
+			dt.Columns.Add("type", typeof(String));
 
-            JObject dynJson = JsonGetter.getJsonObject();
-            foreach (KeyValuePair<String, JToken> item in dynJson)
-            {
-                String[] line = {(String) item.Value["id"], (String) item.Value["type"],
-					(String) item.Value["name"], (String) item.Value["email"], (String) item.Value["info"]};
-                dt.Rows.Add(line);
-            }
+			List<Result> results = JsonGetter.GetData();
+			foreach (Result item in results)
+			{
+				String type = "";
+				if (item.isCompany)
+					type = "Company";
+				else if (item.isContact)
+					type = "Contact";
+				String[] line = {(String) item.idNumber.ToString(),
+					(String) item.name, (String) item.emailAddress, (String) type};
+				dt.Rows.Add(line);
+			}
             bs.DataSource = dt;
             dataGridView1.DataSource = bs;
         }
