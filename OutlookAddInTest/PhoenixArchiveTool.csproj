@@ -173,17 +173,14 @@
     can be found.
   -->
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="ArchiveEmailAttachment.cs" />
     <Compile Include="ArchiveEmailItem.cs" />
-=======
     <Compile Include="LoadingForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LoadingForm.Designer.cs">
       <DependentUpon>LoadingForm.cs</DependentUpon>
     </Compile>
->>>>>>> 42092be9fabdb0688e725028ce364388fd39d67f
     <Compile Include="PhoenixFormRegion.cs">
       <SubType>UserControl</SubType>
     </Compile>
