@@ -13,7 +13,6 @@ namespace OutlookAddInTest
 {
 	class JsonGetter
 	{
-<<<<<<< HEAD
 		public static JObject getJsonObject()
 		{
 			//getting companyID, id, type, name, email
@@ -318,7 +317,6 @@ namespace OutlookAddInTest
 			}");
 		}
 
-=======
 		public static List<Result> GetData()
         {
 			List<Result> model = null;
@@ -334,7 +332,6 @@ namespace OutlookAddInTest
 			task.Wait();
 			return model;
         }
->>>>>>> 42092be9fabdb0688e725028ce364388fd39d67f
 	}
 
 	public class Result
