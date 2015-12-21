@@ -166,18 +166,15 @@ namespace OutlookAddInTest
 				}
 			}
 			String entryId = mailItem.EntryID;
-			String emailJson = JsonConvert.SerializeObject(email);
+			var emailJson = new StringContent(JsonConvert.SerializeObject(email));
 			String url = "http://phoenix-dev.azurewebsites.net/api/v1/outlook/archived-emails/"
 					+ entityId + "/" + entryId + "?apiToken=MUg@R*A8jgtwY$aQXv3J";
 
-			var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-			httpWebRequest.ContentType = "application/json";
-			httpWebRequest.Method = "PUT";
-			using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-			{
-				streamWriter.Write(emailJson);
-			}
-			//var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
+			var client = new HttpClient();
+			emailJson.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+			HttpResponseMessage result = client.PostAsync(url, emailJson).Result;
+			//return result.Content.ReadAsStreamAsync().Result;
 		}
     }
 }
