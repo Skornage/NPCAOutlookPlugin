@@ -79,7 +79,8 @@ namespace OutlookAddInTest
 
 		protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject()
 		{
-			return new MainRibbon();
+			//this.currentUser = this.Application.Session.CurrentUser.AddressEntry.GetExchangeUser();
+			return new MainRibbon(this);
 		}
 
         #region VSTO generated code

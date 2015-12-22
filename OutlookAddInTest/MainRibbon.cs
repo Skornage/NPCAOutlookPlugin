@@ -19,9 +19,11 @@ namespace OutlookAddInTest
 		private Office.IRibbonUI ribbon;
 		private MainForm CompaniesAndContacts;
 		private LoadingForm loadingForm;
+		private PhoenixPlugin phoenixApp;
 
-		public MainRibbon()
+		public MainRibbon(PhoenixPlugin app)
 		{
+			this.phoenixApp = app;
 		}
 
 		#region IRibbonExtensibility Members
@@ -71,7 +73,7 @@ namespace OutlookAddInTest
 			Outlook.MailItem item = getMailItem();
 			if (item != null)
 			{
-				CompaniesAndContacts = new MainForm(item);
+				CompaniesAndContacts = new MainForm(item, this.phoenixApp);
 			}
 		}
 		void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -116,8 +118,6 @@ namespace OutlookAddInTest
 					var client = new HttpClient();
 					var request = new HttpRequestMessage(HttpMethod.Delete, url);
 					var response = client.SendAsync(request).Result;
-
-					System.Diagnostics.Debug.WriteLine("DELETE: " + response.ToString());
 
 					mailItem.MessageClass = "IPM.Note";
 					mailItem.Save();

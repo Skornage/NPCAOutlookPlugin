@@ -17,9 +17,10 @@ namespace OutlookAddInTest
 		public bool IsBodyHtml { get; set; }
 		public List<ArchiveEmailAttachment> Attachments { get; set; }
 
-		public ArchiveEmailItem(DateTime whenReceivedUtc, String fromDisplayName, String fromEmailAddress,
+		public ArchiveEmailItem(String username, DateTime whenReceivedUtc, String fromDisplayName, String fromEmailAddress,
 			String subject, String body, bool isBodyHtml)
 		{
+			this.Username = username;
 			this.WhenReceivedUtc = whenReceivedUtc;
 			this.FromDisplayName = fromDisplayName;
 			this.FromEmailAddress = fromEmailAddress;

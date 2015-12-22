@@ -23,10 +23,12 @@ namespace OutlookAddInTest
         DataTable dt = new DataTable();
         BindingSource bs = new BindingSource();
 		List<Result> results = JsonGetter.GetData();
+		private Outlook.ExchangeUser currentUser;
 
 
-		public MainForm(Outlook.MailItem mailItem)
+		public MainForm(Outlook.MailItem mailItem, PhoenixPlugin app)
 		{
+			this.currentUser = app.Application.Session.CurrentUser.AddressEntry.GetExchangeUser();
 			this.mailItem = mailItem;
 			InitializeComponent();
 			populateDataGrid(0);
@@ -58,6 +60,7 @@ namespace OutlookAddInTest
 
 			DataGridViewRow row = dataGridView1.CurrentRow;
 
+			String username = this.currentUser.Name;
 			DateTime whenReceivedUtc = mailItem.ReceivedTime.ToUniversalTime();
 			String fromDisplayName = mailItem.SenderName;
 			var mailSender = mailItem.Sender;
@@ -67,7 +70,7 @@ namespace OutlookAddInTest
 			String body = mailItem.HTMLBody;
 			bool isBodyHtml = true;
 
-			ArchiveEmailItem toArchive = new ArchiveEmailItem(whenReceivedUtc, fromDisplayName, fromEmailAddress,
+			ArchiveEmailItem toArchive = new ArchiveEmailItem(username, whenReceivedUtc, fromDisplayName, fromEmailAddress,
 				subject, body, isBodyHtml);
 
 			//Get Attachments
@@ -181,8 +184,8 @@ namespace OutlookAddInTest
 
 			var emailJson = new StringContent(JsonConvert.SerializeObject(email, jsonSerializerSettings), Encoding.UTF8, "application/json");
 
-			System.Diagnostics.Debug.WriteLine(JsonConvert.SerializeObject(email, jsonSerializerSettings));
-			System.Diagnostics.Debug.WriteLine("ENTITY ID: " + entityId);
+			//System.Diagnostics.Debug.WriteLine(JsonConvert.SerializeObject(email, jsonSerializerSettings));
+			//System.Diagnostics.Debug.WriteLine("ENTITY ID: " + entityId);
 
 			String url = "http://phoenix-dev.azurewebsites.net/api/v1/outlook/archived-emails/"
 					+ entityId + "/" + entryId + "?apiToken=MUg@R*A8jgtwY$aQXv3J";
@@ -195,7 +198,7 @@ namespace OutlookAddInTest
 			//emailJson.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 			//HttpResponseMessage result = client.PutAsJsonAsync(url, emailJson).Result;
 
-			System.Diagnostics.Debug.WriteLine("RESULT: " + response.ToString());
+			//System.Diagnostics.Debug.WriteLine("RESULT: " + response.ToString());
 
 			var entityIdProperty = mailItem.UserProperties.Add("entityId", 
 				Outlook.OlUserPropertyType.olText, false, 1);
