@@ -8,6 +8,7 @@ namespace OutlookAddInTest
 {
 	public class ArchiveEmailItem
 	{
+		public String Username { get; set; }
 		public DateTime WhenReceivedUtc { get; set; }
 		public String FromDisplayName { get; set; }
 		public String FromEmailAddress { get; set; }

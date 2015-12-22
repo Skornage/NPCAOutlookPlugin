@@ -8,6 +8,7 @@ using System.Text;
 using System.ComponentModel;
 using Outlook = Microsoft.Office.Interop.Outlook;
 using Office = Microsoft.Office.Core;
+using System.Net.Http;
 
 namespace OutlookAddInTest
 {
@@ -104,9 +105,23 @@ namespace OutlookAddInTest
                       
 			if (mailItem != null)
 			{
-                //API.Remove();
-                mailItem.MessageClass = "IPM.Note";
-				mailItem.Save();
+				var entityIdProperty = mailItem.UserProperties.Find("entityId");
+				if (entityIdProperty != null)
+				{
+					String entityId = entityIdProperty.Value;
+					String entryId = mailItem.EntryID;
+					String url = "http://phoenix-dev.azurewebsites.net/api/v1/outlook/archived-emails/"
+						+ entityId + "/" + entryId + "?apiToken=MUg@R*A8jgtwY$aQXv3J";
+
+					var client = new HttpClient();
+					var request = new HttpRequestMessage(HttpMethod.Delete, url);
+					var response = client.SendAsync(request).Result;
+
+					System.Diagnostics.Debug.WriteLine("DELETE: " + response.ToString());
+
+					mailItem.MessageClass = "IPM.Note";
+					mailItem.Save();
+				}
 			}
 		}
 

@@ -13,6 +13,7 @@ using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using Newtonsoft.Json.Serialization;
 
 namespace OutlookAddInTest
 {
@@ -22,6 +23,8 @@ namespace OutlookAddInTest
         DataTable dt = new DataTable();
         BindingSource bs = new BindingSource();
 		List<Result> results = JsonGetter.GetData();
+
+
 		public MainForm(Outlook.MailItem mailItem)
 		{
 			this.mailItem = mailItem;
@@ -50,12 +53,16 @@ namespace OutlookAddInTest
 
 		private void Ok_Click(object sender, EventArgs e)
 		{
+			string PR_SMTP_ADDRESS = @"http://schemas.microsoft.com/mapi/proptag/0x39FE001E";
+			string PR_ATTACH_MIME_TAG = @"http://schemas.microsoft.com/mapi/proptag/0x370E001F";
 
 			DataGridViewRow row = dataGridView1.CurrentRow;
 
 			DateTime whenReceivedUtc = mailItem.ReceivedTime.ToUniversalTime();
 			String fromDisplayName = mailItem.SenderName;
-			String fromEmailAddress = mailItem.SenderEmailAddress;
+			var mailSender = mailItem.Sender;
+			String fromEmailAddress = mailSender.PropertyAccessor.GetProperty(
+					PR_SMTP_ADDRESS) as string;
 			String subject = mailItem.Subject;
 			String body = mailItem.HTMLBody;
 			bool isBodyHtml = true;
@@ -69,9 +76,9 @@ namespace OutlookAddInTest
 			ArchiveEmailAttachment archAttachment;
 			foreach (Outlook.Attachment attachment in mailItem.Attachments) {
 				String fileName = attachment.FileName;
-				String mediaTypeName = attachment.Type.ToString();
+				//String mediaTypeName = attachment.PropertyAccessor.GetProperty(PR_ATTACH_MIME_TAG);
 				byte[] content = attachment.PropertyAccessor.GetProperty(PR_ATTACH_DATA_BIN);
-				archAttachment = new ArchiveEmailAttachment(fileName, mediaTypeName, content);
+				archAttachment = new ArchiveEmailAttachment(fileName, content);
 				toArchive.addAttachment(archAttachment);
 			}
 
@@ -155,26 +162,45 @@ namespace OutlookAddInTest
 
 		private void archiveEmail(ArchiveEmailItem email, DataGridViewRow row)
 		{
-			var id = row.Cells["id"];
+			int id = int.Parse(row.Cells["id"].Value.ToString());
 			String entityId = "";
 			foreach (Result item in results)
 			{
-				if (item.idNumber.Equals(id))
+				if (item.idNumber == id)
 				{
 					entityId = item.id;
 					break;
 				}
 			}
 			String entryId = mailItem.EntryID;
-			var emailJson = new StringContent(JsonConvert.SerializeObject(email));
+
+			var jsonSerializerSettings = new JsonSerializerSettings
+			{
+				ContractResolver = new CamelCasePropertyNamesContractResolver()
+			};
+
+			var emailJson = new StringContent(JsonConvert.SerializeObject(email, jsonSerializerSettings), Encoding.UTF8, "application/json");
+
+			System.Diagnostics.Debug.WriteLine(JsonConvert.SerializeObject(email, jsonSerializerSettings));
+			System.Diagnostics.Debug.WriteLine("ENTITY ID: " + entityId);
+
 			String url = "http://phoenix-dev.azurewebsites.net/api/v1/outlook/archived-emails/"
 					+ entityId + "/" + entryId + "?apiToken=MUg@R*A8jgtwY$aQXv3J";
 
 
 			var client = new HttpClient();
-			emailJson.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-			HttpResponseMessage result = client.PostAsync(url, emailJson).Result;
-			//return result.Content.ReadAsStreamAsync().Result;
+			var request = new HttpRequestMessage(HttpMethod.Put, url);
+			request.Content = emailJson;
+			var response = client.SendAsync(request).Result;
+			//emailJson.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+			//HttpResponseMessage result = client.PutAsJsonAsync(url, emailJson).Result;
+
+			System.Diagnostics.Debug.WriteLine("RESULT: " + response.ToString());
+
+			var entityIdProperty = mailItem.UserProperties.Add("entityId", 
+				Outlook.OlUserPropertyType.olText, false, 1);
+			entityIdProperty.Value = entityId;
+			mailItem.Save();
 		}
     }
 }

@@ -95,5 +95,5 @@ namespace OutlookAddInTest
         }
         
         #endregion
-    }
+	}
 }

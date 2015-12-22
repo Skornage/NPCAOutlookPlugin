@@ -9,13 +9,13 @@ namespace OutlookAddInTest
 	public class ArchiveEmailAttachment
 	{
 		public String FileName { get; set; }
-		public String MediaTypeName { get; set; }
+		//public String MediaTypeName { get; set; }
 		public byte[] Content { get; set; }
 
-		public ArchiveEmailAttachment(String fileName, String mediaTypeName, byte[] content)
+		public ArchiveEmailAttachment(String fileName, byte[] content)
 		{
 			this.FileName = fileName;
-			this.MediaTypeName  = mediaTypeName;
+			//this.MediaTypeName  = mediaTypeName;
 			this.Content = content;
 		}
 	}
