@@ -340,7 +340,7 @@
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td>{D9A719EA-60C0-4031-B23B-A44AE61DA186}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>PhoenixArchiveTool.Primary_output</td><td>{638FECFB-49E1-42FF-B89B-C351A774130B}</td><td>INSTALLDIR</td><td>2</td><td/><td>phoenixarchivetool.primary_o</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>PhoenixArchiveTool.Primary_output</td><td>{FFA7466B-064D-44C3-9A8F-94927AE3E99C}</td><td>INSTALLDIR</td><td>2</td><td/><td>phoenixarchivetool.primary_o</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
 	<table name="Condition">
@@ -1878,8 +1878,8 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
-		<row><td>outlookaddintest.dll.manifes</td><td>ISX_DEFAULTCOMPONENT</td><td>OUTLOO~1.MAN|OutlookAddInTest.dll.manifest</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\bin\Debug\OutlookAddInTest.dll.manifest</td><td>1</td><td/></row>
-		<row><td>outlookaddintest.vsto</td><td>ISX_DEFAULTCOMPONENT</td><td>OUTLOO~1.VST|OutlookAddInTest.vsto</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\bin\Debug\OutlookAddInTest.vsto</td><td>1</td><td/></row>
+		<row><td>outlookaddintest.dll.manifes</td><td>ISX_DEFAULTCOMPONENT</td><td>OUTLOO~1.MAN|OutlookAddInTest.dll.manifest</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\bin\Release\OutlookAddInTest.dll.manifest</td><td>1</td><td/></row>
+		<row><td>outlookaddintest.vsto</td><td>ISX_DEFAULTCOMPONENT</td><td>OUTLOO~1.VST|OutlookAddInTest.vsto</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\millerna\git\NPCAOutlookPlugin\OutlookAddInTest\bin\Release\OutlookAddInTest.vsto</td><td>1</td><td/></row>
 		<row><td>phoenixarchivetool.primary_o</td><td>PhoenixArchiveTool.Primary_output</td><td>PhoenixArchiveTool.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;PhoenixArchiveTool&gt;|Built</td><td>3</td><td/></row>
 	</table>
 
@@ -2025,7 +2025,7 @@
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_D6A1B104_895A_4B07_9A4F_320623993CF2_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>PhoenixArchiveTool.Primary_output</td><td/><td/><td>_507B0F8C_087A_498D_B9E6_CB0067060FD1_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>PhoenixArchiveTool.Primary_output</td><td/><td/><td>_529CD48F_102E_4302_983E_4C1966BF00FF_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="ISCustomActionReference">
@@ -2615,7 +2615,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1033</td><td>WDD Software Solutions</td><td>0</td><td/><td>-1239202961</td></row>
+		<row><td>COMPANY_NAME</td><td>1033</td><td>WDD Software Solutions</td><td>0</td><td/><td>-1104991574</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>-1239195346</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>-1239195346</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_OS</td><td>1033</td><td>The operating system is not adequate for running [ProductName].</td><td>0</td><td/><td>-1239195346</td></row>
@@ -3715,8 +3715,8 @@
 		<row><td>IDS__TargetReq_DESC_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>-1239195346</td></row>
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-1239195346</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>-1239195346</td></row>
-		<row><td>ID_STRING1</td><td>1033</td><td>http://www.WDDSoftwareSolutions.com</td><td>0</td><td/><td>-1239202961</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>WDD Software Solutions</td><td>0</td><td/><td>-1239202961</td></row>
+		<row><td>ID_STRING1</td><td>1033</td><td>http://www.WDDSoftwareSolutions.com</td><td>0</td><td/><td>-1104991574</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>WDD Software Solutions</td><td>0</td><td/><td>-1104991574</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>-1239195346</td></row>
 	</table>
 
