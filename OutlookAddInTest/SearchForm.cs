@@ -31,8 +31,7 @@ namespace OutlookAddInTest
             string type = typeInput.Text.Trim();
             string name = nameInput.Text.Trim();
             string email = emailInput.Text.Trim();
-            string info = infoInput.Text.Trim();
-            this.form.advancedSearch(id, type, name, email, info);
+            this.form.advancedSearch(id, type, name, email);
             this.Close();
         }
     }
