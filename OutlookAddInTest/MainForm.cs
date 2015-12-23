@@ -57,37 +57,43 @@ namespace OutlookAddInTest
 		{
 			string PR_SMTP_ADDRESS = @"http://schemas.microsoft.com/mapi/proptag/0x39FE001E";
 			string PR_ATTACH_MIME_TAG = @"http://schemas.microsoft.com/mapi/proptag/0x370E001F";
-
-			DataGridViewRow row = dataGridView1.CurrentRow;
-
-			String username = this.currentUser.Name;
-			DateTime whenReceivedUtc = mailItem.ReceivedTime.ToUniversalTime();
-			String fromDisplayName = mailItem.SenderName;
-			var mailSender = mailItem.Sender;
-			String fromEmailAddress = mailSender.PropertyAccessor.GetProperty(
-					PR_SMTP_ADDRESS) as string;
-			String subject = mailItem.Subject;
-			String body = mailItem.HTMLBody;
-			bool isBodyHtml = true;
-
-			ArchiveEmailItem toArchive = new ArchiveEmailItem(username, whenReceivedUtc, fromDisplayName, fromEmailAddress,
-				subject, body, isBodyHtml);
-
-			//Get Attachments
 			const string PR_ATTACH_DATA_BIN =
-                "http://schemas.microsoft.com/mapi/proptag/0x37010102";
-			ArchiveEmailAttachment archAttachment;
-			foreach (Outlook.Attachment attachment in mailItem.Attachments) {
-				String fileName = attachment.FileName;
-				//String mediaTypeName = attachment.PropertyAccessor.GetProperty(PR_ATTACH_MIME_TAG);
-				byte[] content = attachment.PropertyAccessor.GetProperty(PR_ATTACH_DATA_BIN);
-				archAttachment = new ArchiveEmailAttachment(fileName, content);
-				toArchive.addAttachment(archAttachment);
-			}
+				"http://schemas.microsoft.com/mapi/proptag/0x37010102";
 
-			archiveEmail(toArchive, row);
-            mailItem.MessageClass = "IPM.Note.Phoenix";
-			mailItem.Save();
+			var entityIdProperty = mailItem.UserProperties.Add("entityId",
+				Outlook.OlUserPropertyType.olText, false, 1);
+
+			//DataGridViewRow row = dataGridView1.CurrentRow;
+			foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+			{
+				String username = this.currentUser.Name;
+				DateTime whenReceivedUtc = mailItem.ReceivedTime.ToUniversalTime();
+				String fromDisplayName = mailItem.SenderName;
+				var mailSender = mailItem.Sender;
+				String fromEmailAddress = mailSender.PropertyAccessor.GetProperty(
+						PR_SMTP_ADDRESS) as string;
+				String subject = mailItem.Subject;
+				String body = mailItem.HTMLBody;
+				bool isBodyHtml = true;
+
+				ArchiveEmailItem toArchive = new ArchiveEmailItem(username, whenReceivedUtc, fromDisplayName, fromEmailAddress,
+					subject, body, isBodyHtml);
+
+				//Get Attachments
+				ArchiveEmailAttachment archAttachment;
+				foreach (Outlook.Attachment attachment in mailItem.Attachments)
+				{
+					String fileName = attachment.FileName;
+					//String mediaTypeName = attachment.PropertyAccessor.GetProperty(PR_ATTACH_MIME_TAG);
+					byte[] content = attachment.PropertyAccessor.GetProperty(PR_ATTACH_DATA_BIN);
+					archAttachment = new ArchiveEmailAttachment(fileName, content);
+					toArchive.addAttachment(archAttachment);
+				}
+
+				archiveEmail(toArchive, row, entityIdProperty);
+				mailItem.MessageClass = "IPM.Note.Phoenix";
+				mailItem.Save();
+			}
 			this.Close();
 		}
 
@@ -163,7 +169,7 @@ namespace OutlookAddInTest
 
 		}
 
-		private void archiveEmail(ArchiveEmailItem email, DataGridViewRow row)
+		private void archiveEmail(ArchiveEmailItem email, DataGridViewRow row, Outlook.UserProperty entityIdProperty)
 		{
 			int id = int.Parse(row.Cells["id"].Value.ToString());
 			String entityId = "";
@@ -200,9 +206,7 @@ namespace OutlookAddInTest
 
 			//System.Diagnostics.Debug.WriteLine("RESULT: " + response.ToString());
 
-			var entityIdProperty = mailItem.UserProperties.Add("entityId", 
-				Outlook.OlUserPropertyType.olText, false, 1);
-			entityIdProperty.Value = entityId;
+			entityIdProperty.Value += ", " + entityId;
 			mailItem.Save();
 		}
     }
