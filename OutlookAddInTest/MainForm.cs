@@ -70,8 +70,16 @@ namespace OutlookAddInTest
 				DateTime whenReceivedUtc = mailItem.ReceivedTime.ToUniversalTime();
 				String fromDisplayName = mailItem.SenderName;
 				var mailSender = mailItem.Sender;
-				String fromEmailAddress = mailSender.PropertyAccessor.GetProperty(
-						PR_SMTP_ADDRESS) as string;
+				String fromEmailAddress = "";
+				try
+				{
+					fromEmailAddress = mailSender.PropertyAccessor.GetProperty(
+							PR_SMTP_ADDRESS) as string;
+				}
+				catch (Exception exc)
+				{
+					fromEmailAddress = "";
+				}
 				String subject = mailItem.Subject;
 				String body = mailItem.HTMLBody;
 				bool isBodyHtml = true;
