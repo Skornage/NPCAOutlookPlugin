@@ -22,12 +22,13 @@ namespace OutlookAddInTest
 		private Outlook.MailItem mailItem;
         DataTable dt = new DataTable();
         BindingSource bs = new BindingSource();
-		List<Result> results = JsonGetter.GetData();
+		List<Result> results;
 		private Outlook.ExchangeUser currentUser;
 
 
 		public MainForm(Outlook.MailItem mailItem, PhoenixPlugin app)
 		{
+			results = JsonGetter.GetData();
 			this.currentUser = app.Application.Session.CurrentUser.AddressEntry.GetExchangeUser();
 			this.mailItem = mailItem;
 			InitializeComponent();
@@ -198,21 +199,13 @@ namespace OutlookAddInTest
 
 			var emailJson = new StringContent(JsonConvert.SerializeObject(email, jsonSerializerSettings), Encoding.UTF8, "application/json");
 
-			//System.Diagnostics.Debug.WriteLine(JsonConvert.SerializeObject(email, jsonSerializerSettings));
-			//System.Diagnostics.Debug.WriteLine("ENTITY ID: " + entityId);
-
-			String url = "http://phoenix-dev.azurewebsites.net/api/v1/outlook/archived-emails/"
+			String url = "http://npca-phoenix.azurewebsites.net/api/v1/outlook/archived-emails/"
 					+ entityId + "/" + entryId + "?apiToken=MUg@R*A8jgtwY$aQXv3J";
-
 
 			var client = new HttpClient();
 			var request = new HttpRequestMessage(HttpMethod.Put, url);
 			request.Content = emailJson;
 			var response = client.SendAsync(request).Result;
-			//emailJson.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-			//HttpResponseMessage result = client.PutAsJsonAsync(url, emailJson).Result;
-
-			//System.Diagnostics.Debug.WriteLine("RESULT: " + response.ToString());
 
 			entityIdProperty.Value += ", " + entityId;
 			mailItem.Save();

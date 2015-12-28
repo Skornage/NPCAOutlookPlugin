@@ -2,12 +2,12 @@
 <customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
 	<ribbon>
 		<tabs>
-			<tab idMso="TabMail">
-				<group id="ContentGroup" label="Phoenix">
-					<button id="textButton" label="Attach"
+			<tab idMso="TabReadMessage">
+				<group id="ContentGroup2" label="Phoenix">
+					<button id="textButton2" label="Attach"
              screentip="Help" onAction="OnTextButton"
              supertip="Click to archive the currently selected email to a company or contact."/>
-					<button id="tableButton" label="Remove Selected"
+					<button id="tableButton2" label="Remove Selected"
              screentip="Help" onAction="OnRemoveButton"
              supertip="Click to remove the currently selected email from the archives."/>
 				</group>

@@ -66,16 +66,16 @@
 			// 
 			// textBox1
 			// 
-			this.textBox1.Location = new System.Drawing.Point(353, 34);
+			this.textBox1.Location = new System.Drawing.Point(338, 34);
 			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(143, 22);
+			this.textBox1.Size = new System.Drawing.Size(136, 22);
 			this.textBox1.TabIndex = 5;
 			// 
 			// button3
 			// 
-			this.button3.Location = new System.Drawing.Point(502, 32);
+			this.button3.Location = new System.Drawing.Point(480, 32);
 			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(128, 24);
+			this.button3.Size = new System.Drawing.Size(150, 24);
 			this.button3.TabIndex = 6;
 			this.button3.Text = "Advanced Search";
 			this.button3.UseVisualStyleBackColor = true;
@@ -138,7 +138,7 @@
 			this.Controls.Add(this.Cancel);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.MaximumSize = new System.Drawing.Size(662, 488);
+			this.MaximumSize = new System.Drawing.Size(662, 500);
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Phoenix";

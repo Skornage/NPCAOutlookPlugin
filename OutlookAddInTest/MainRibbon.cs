@@ -30,7 +30,16 @@ namespace OutlookAddInTest
 
 		public string GetCustomUI(string ribbonID)
 		{
-			return GetResourceText("OutlookAddInTest.Ribbon1.xml");
+			string ribbonXML = String.Empty;
+
+			if (ribbonID == "Microsoft.Outlook.Explorer")
+			{
+				ribbonXML = GetResourceText("OutlookAddInTest.Ribbon1.xml");
+			} else if (ribbonID == "Microsoft.Outlook.Mail.Read")
+			{
+				ribbonXML = GetResourceText("OutlookAddInTest.MessageRibbon.xml");
+			}
+			return ribbonXML;
 		}
 
 		#endregion
@@ -86,7 +95,15 @@ namespace OutlookAddInTest
 		{
 			try
 			{
-				Object explorer = Globals.PhoenixPlugin.Application.ActiveWindow().Selection[1];
+				Object explorer = null;
+				try
+				{
+					explorer = Globals.PhoenixPlugin.Application.ActiveWindow().Selection[1];
+				}
+				catch
+				{
+					explorer = Globals.PhoenixPlugin.Application.ActiveInspector().CurrentItem;
+				}
 				if (explorer is Outlook.MailItem)
 				{
 					return (Outlook.MailItem)explorer;
@@ -116,7 +133,7 @@ namespace OutlookAddInTest
 					for (int i = 0; i < entityIds.Length; i++)
 					{
 						String entityId = entityIds[i].Trim();
-						String url = "http://phoenix-dev.azurewebsites.net/api/v1/outlook/archived-emails/"
+						String url = "http://npca-phoenix.azurewebsites.net/api/v1/outlook/archived-emails/"
 							+ entityId + "/" + entryId + "?apiToken=MUg@R*A8jgtwY$aQXv3J";
 
 						var client = new HttpClient();
