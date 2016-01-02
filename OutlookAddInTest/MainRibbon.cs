@@ -135,7 +135,7 @@ namespace OutlookAddInTest
 						for (int i = 0; i < entityIds.Length; i++)
 						{
 							String entityId = entityIds[i].Trim();
-							String url = "https://npca-phoenix-staging.azurewebsites.net/api/v1/outlook/archived-emails/"
+							String url = "https://portal.precast.org/api/v1/outlook/archived-emails/"
 								+ entityId + "/" + entryId + "?apiToken=MUg@R*A8jgtwY$aQXv3J";
 
 							var client = new HttpClient();

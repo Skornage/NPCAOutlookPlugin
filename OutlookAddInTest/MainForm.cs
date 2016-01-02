@@ -198,7 +198,7 @@ namespace OutlookAddInTest
 
 			var emailJson = new StringContent(JsonConvert.SerializeObject(email, jsonSerializerSettings), Encoding.UTF8, "application/json");
 
-			String url = "https://npca-phoenix-staging.azurewebsites.net/api/v1/outlook/archived-emails/"
+			String url = "https://portal.precast.org/api/v1/outlook/archived-emails/"
 					+ entityId + "/" + entryId + "?apiToken=MUg@R*A8jgtwY$aQXv3J";
 			try 
 			{

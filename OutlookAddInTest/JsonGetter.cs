@@ -17,7 +17,7 @@ namespace OutlookAddInTest
         {
 			List<Result> model = null;
 			var client = new HttpClient();
-			var task = client.GetAsync("https://npca-phoenix-staging.azurewebsites.net/api/v1/outlook/businessentities?apiToken=MUg@R*A8jgtwY$aQXv3J")
+			var task = client.GetAsync("https://portal.precast.org/api/v1/outlook/businessentities?apiToken=MUg@R*A8jgtwY$aQXv3J")
 			  .ContinueWith((taskwithresponse) =>
 			  {
 				  var response = taskwithresponse.Result;
