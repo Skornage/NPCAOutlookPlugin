@@ -100,7 +100,6 @@ namespace OutlookAddInTest
 				}
 
 				archiveEmail(toArchive, row, entityIdProperty);
-				mailItem.MessageClass = "IPM.Note.Phoenix";
 				mailItem.Save();
 			}
 			this.Close();
@@ -199,16 +198,22 @@ namespace OutlookAddInTest
 
 			var emailJson = new StringContent(JsonConvert.SerializeObject(email, jsonSerializerSettings), Encoding.UTF8, "application/json");
 
-			String url = "http://npca-phoenix.azurewebsites.net/api/v1/outlook/archived-emails/"
+			String url = "https://npca-phoenix-staging.azurewebsites.net/api/v1/outlook/archived-emails/"
 					+ entityId + "/" + entryId + "?apiToken=MUg@R*A8jgtwY$aQXv3J";
-
-			var client = new HttpClient();
-			var request = new HttpRequestMessage(HttpMethod.Put, url);
-			request.Content = emailJson;
-			var response = client.SendAsync(request).Result;
-
-			entityIdProperty.Value += ", " + entityId;
-			mailItem.Save();
+			try 
+			{
+				var client = new HttpClient();
+				var request = new HttpRequestMessage(HttpMethod.Put, url);
+				request.Content = emailJson;
+				var response = client.SendAsync(request).Result;
+				entityIdProperty.Value += ", " + entityId;
+				mailItem.MessageClass = "IPM.Note.Phoenix";
+				mailItem.Save();
+			}
+			catch
+			{
+				System.Windows.Forms.MessageBox.Show("Failed to archive the email. Please try again.");
+			}
 		}
     }
 }

@@ -127,22 +127,29 @@ namespace OutlookAddInTest
 				var entityIdProperty = mailItem.UserProperties.Find("entityId");
 				if (entityIdProperty != null)
 				{
-					String value = entityIdProperty.Value;
-					String[] entityIds = value.Split(',');
-					String entryId = mailItem.EntryID;
-					for (int i = 0; i < entityIds.Length; i++)
+					try
 					{
-						String entityId = entityIds[i].Trim();
-						String url = "http://npca-phoenix.azurewebsites.net/api/v1/outlook/archived-emails/"
-							+ entityId + "/" + entryId + "?apiToken=MUg@R*A8jgtwY$aQXv3J";
+						String value = entityIdProperty.Value;
+						String[] entityIds = value.Split(',');
+						String entryId = mailItem.EntryID;
+						for (int i = 0; i < entityIds.Length; i++)
+						{
+							String entityId = entityIds[i].Trim();
+							String url = "https://npca-phoenix-staging.azurewebsites.net/api/v1/outlook/archived-emails/"
+								+ entityId + "/" + entryId + "?apiToken=MUg@R*A8jgtwY$aQXv3J";
 
-						var client = new HttpClient();
-						var request = new HttpRequestMessage(HttpMethod.Delete, url);
-						var response = client.SendAsync(request).Result;
+							var client = new HttpClient();
+							var request = new HttpRequestMessage(HttpMethod.Delete, url);
+							var response = client.SendAsync(request).Result;
+						}
+
+						mailItem.MessageClass = "IPM.Note";
+						mailItem.Save();
 					}
-
-					mailItem.MessageClass = "IPM.Note";
-					mailItem.Save();
+					catch
+					{
+						System.Windows.Forms.MessageBox.Show("Failed to remove the archived email. Please try again.");
+					}
 				}
 			}
 		}
