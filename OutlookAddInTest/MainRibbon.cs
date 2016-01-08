@@ -58,6 +58,9 @@ namespace OutlookAddInTest
 			Outlook.MailItem item = getMailItem();
 			if (item != null)
 			{
+				//CompaniesAndContacts = new MainForm(item, this.phoenixApp);
+				//CompaniesAndContacts.Show();
+
 				loadingForm = new LoadingForm();
 				loadingForm.Show();
 
@@ -93,29 +96,29 @@ namespace OutlookAddInTest
 
 		private Outlook.MailItem getMailItem()
 		{
+			Object explorer = null;
 			try
 			{
-				Object explorer = null;
+				explorer = Globals.PhoenixPlugin.Application.ActiveWindow().Selection[1];
+			}
+			catch
+			{
 				try
-				{
-					explorer = Globals.PhoenixPlugin.Application.ActiveWindow().Selection[1];
-				}
-				catch
 				{
 					explorer = Globals.PhoenixPlugin.Application.ActiveInspector().CurrentItem;
 				}
-				if (explorer is Outlook.MailItem)
+				catch
 				{
-					return (Outlook.MailItem)explorer;
+					System.Windows.Forms.MessageBox.Show("You must select an Email first.");
+					return null;
 				}
-				System.Windows.Forms.MessageBox.Show("The item you selected was not an email item.");
-				return null;
 			}
-			catch (System.Runtime.InteropServices.COMException)
+			if (explorer is Outlook.MailItem)
 			{
-				System.Windows.Forms.MessageBox.Show("You must select an Email first.");
-				return null;
+				return (Outlook.MailItem)explorer;
 			}
+			System.Windows.Forms.MessageBox.Show("The item you selected was not an email item.");
+			return null;
 		}
 
 		public void OnRemoveButton(Office.IRibbonControl control)
@@ -135,7 +138,7 @@ namespace OutlookAddInTest
 						for (int i = 0; i < entityIds.Length; i++)
 						{
 							String entityId = entityIds[i].Trim();
-							String url = "https://portal.precast.org/api/v1/outlook/archived-emails/"
+							String url = "https://npca-phoenix-staging.azurewebsites.net/api/v1/outlook/archived-emails/"
 								+ entityId + "/" + entryId + "?apiToken=MUg@R*A8jgtwY$aQXv3J";
 
 							var client = new HttpClient();

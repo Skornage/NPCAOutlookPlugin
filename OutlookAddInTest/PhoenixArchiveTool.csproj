@@ -34,10 +34,10 @@
     <PublishUrl>publish\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.5</ApplicationVersion>
+    <ApplicationVersion>1.0.0.2</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
-    <UpdateInterval>7</UpdateInterval>
+    <UpdateInterval>3</UpdateInterval>
     <UpdateIntervalUnits>days</UpdateIntervalUnits>
     <ProductName>Phoenix Outlook Plugin</ProductName>
     <PublisherName>WDD Software Solutions</PublisherName>
@@ -198,6 +198,9 @@
   <ItemGroup>
     <Compile Include="ArchiveEmailAttachment.cs" />
     <Compile Include="ArchiveEmailItem.cs" />
+    <Compile Include="DelayableTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="LoadingForm.cs">
       <SubType>Form</SubType>
     </Compile>

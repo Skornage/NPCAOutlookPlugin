@@ -10,10 +10,10 @@ using System.Windows.Forms;
 using Outlook = Microsoft.Office.Interop.Outlook;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 using System.IO;
 using System.Net;
 using System.Net.Http;
-using Newtonsoft.Json.Serialization;
 
 namespace OutlookAddInTest
 {
@@ -25,29 +25,39 @@ namespace OutlookAddInTest
 		List<Result> results;
 		private Outlook.ExchangeUser currentUser;
 
-
 		public MainForm(Outlook.MailItem mailItem, PhoenixPlugin app)
 		{
-			results = JsonGetter.GetData();
 			this.currentUser = app.Application.Session.CurrentUser.AddressEntry.GetExchangeUser();
 			this.mailItem = mailItem;
 			InitializeComponent();
-			populateDataGrid(0);
-			comboBox1.SelectedIndex = 0;
-            textBox1.TextChanged += new EventHandler(searchTextChanged);
+			initializeDataGrid();
+			//comboBox1.SelectedIndex = 0;
+			textBox1.setDelayedTextChangedTimerTickHandler(new EventHandler(HandleDelayedTextChangedTimerTick));
+			searchLabel.Hide();
+			//+= new EventHandler(searchTextChanged);
 		}
 
-        private void searchTextChanged(object sender, EventArgs e)
-        {
-            if (comboBox1.SelectedIndex != 0)
-            {
-                bs.Filter = string.Format("name LIKE '{0}%' AND type='{1}'", textBox1.Text, comboBox1.SelectedItem);
-            }
-            else
-            {
-                bs.Filter = string.Format("name LIKE '{0}%'", textBox1.Text);
-            }         
-        }
+		private void HandleDelayedTextChangedTimerTick(object sender, EventArgs e)
+		{
+			Timer timer = sender as Timer;
+			timer.Stop();
+			searchLabel.Show();
+			results = textBox1.OnDelayedTextChanged(EventArgs.Empty);
+			populateDataGrid(results);
+			searchLabel.Hide();
+		}
+
+		//private void searchTextChanged(object sender, EventArgs e)
+		//{
+		//	if (comboBox1.SelectedIndex != 0)
+		//	{
+		//		bs.Filter = string.Format("name LIKE '{0}%' AND type='{1}'", textBox1.Text, comboBox1.SelectedItem);
+		//	}
+		//	else
+		//	{
+		//		bs.Filter = string.Format("name LIKE '{0}%'", textBox1.Text);
+		//	}
+		//}
 
 		private void Cancel_Click(object sender, EventArgs e)
 		{
@@ -115,25 +125,32 @@ namespace OutlookAddInTest
 			catch { return false; }
 		}
 
-		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-		{
-            if (comboBox1.SelectedIndex != 0)
-            {
-                dt.DefaultView.RowFilter = string.Format("type = '{0}' AND name LIKE '%{1}%'", comboBox1.SelectedItem, textBox1.Text);
-            }
-            else
-            {
-                dt.DefaultView.RowFilter = "";
-            }
-		}
+		//private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+		//{
+		//	if (comboBox1.SelectedIndex != 0)
+		//	{
+		//		dt.DefaultView.RowFilter = string.Format("type = '{0}' AND name LIKE '%{1}%'", comboBox1.SelectedItem, textBox1.Text);
+		//	}
+		//	else
+		//	{
+		//		dt.DefaultView.RowFilter = "";
+		//	}
+		//}
 
-        private void populateDataGrid(int index)
+        private void initializeDataGrid()
         {
+			dt = new DataTable();
             dt.Columns.Add("id", typeof(String));
             dt.Columns.Add("name", typeof(String));
 			dt.Columns.Add("email", typeof(String));
 			dt.Columns.Add("type", typeof(String));
+			bs.DataSource = dt;
+			dataGridView1.DataSource = bs;
+        }
 
+		private void populateDataGrid(List<Result> results) 
+		{
+			initializeDataGrid();
 			foreach (Result item in results)
 			{
 				String type = "";
@@ -145,9 +162,7 @@ namespace OutlookAddInTest
 					(String) item.name, (String) item.emailAddress, (String) type};
 				dt.Rows.Add(line);
 			}
-            bs.DataSource = dt;
-            dataGridView1.DataSource = bs;
-        }
+		}
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -156,13 +171,15 @@ namespace OutlookAddInTest
 
 		private void button3_Click(object sender, EventArgs e)
 		{
-            SearchForm searchForm = new SearchForm(this);
-            searchForm.Show();
+			//SearchForm searchForm = new SearchForm(this);
+			//searchForm.Show();
+			results = textBox1.OnDelayedTextChanged(EventArgs.Empty);
+			populateDataGrid(results);
 		}
 
         public void advancedSearch(string id, string type, string name, string email)
         {
-            comboBox1.SelectedIndex = 0;
+			//comboBox1.SelectedIndex = 0;
             bs.Filter = string.Format("id LIKE '%{0}%' AND type LIKE '%{1}%' AND name LIKE '%{2}%' AND email LIKE '%{3}%'",
                                        id, type, name, email);
         }
@@ -190,15 +207,13 @@ namespace OutlookAddInTest
 				}
 			}
 			String entryId = mailItem.EntryID;
-
 			var jsonSerializerSettings = new JsonSerializerSettings
 			{
 				ContractResolver = new CamelCasePropertyNamesContractResolver()
 			};
-
 			var emailJson = new StringContent(JsonConvert.SerializeObject(email, jsonSerializerSettings), Encoding.UTF8, "application/json");
 
-			String url = "https://portal.precast.org/api/v1/outlook/archived-emails/"
+			String url = "https://npca-phoenix-staging.azurewebsites.net/api/v1/outlook/archived-emails/"
 					+ entityId + "/" + entryId + "?apiToken=MUg@R*A8jgtwY$aQXv3J";
 			try 
 			{

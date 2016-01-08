@@ -33,12 +33,12 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.Cancel = new System.Windows.Forms.Button();
 			this.Ok = new System.Windows.Forms.Button();
-			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.button3 = new System.Windows.Forms.Button();
-			this.comboBox1 = new System.Windows.Forms.ComboBox();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+			this.textBox1 = new OutlookAddInTest.DelayableTextBox();
 			this.jsonTestBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.searchLabel = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.jsonTestBindingSource)).BeginInit();
@@ -64,37 +64,15 @@
 			this.Ok.UseVisualStyleBackColor = true;
 			this.Ok.Click += new System.EventHandler(this.Ok_Click);
 			// 
-			// textBox1
-			// 
-			this.textBox1.Location = new System.Drawing.Point(338, 34);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(136, 22);
-			this.textBox1.TabIndex = 5;
-			// 
 			// button3
 			// 
-			this.button3.Location = new System.Drawing.Point(480, 32);
+			this.button3.Location = new System.Drawing.Point(340, 31);
 			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(150, 24);
+			this.button3.Size = new System.Drawing.Size(123, 24);
 			this.button3.TabIndex = 6;
-			this.button3.Text = "Advanced Search";
+			this.button3.Text = "Search";
 			this.button3.UseVisualStyleBackColor = true;
 			this.button3.Click += new System.EventHandler(this.button3_Click);
-			// 
-			// comboBox1
-			// 
-			this.comboBox1.DisplayMember = "Test";
-			this.comboBox1.FormattingEnabled = true;
-			this.comboBox1.Items.AddRange(new object[] {
-            "Show All",
-            "Company",
-            "Contact"});
-			this.comboBox1.Location = new System.Drawing.Point(12, 32);
-			this.comboBox1.Name = "comboBox1";
-			this.comboBox1.Size = new System.Drawing.Size(278, 24);
-			this.comboBox1.TabIndex = 7;
-			this.comboBox1.ValueMember = "Test";
-			this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
 			// 
 			// dataGridView1
 			// 
@@ -121,19 +99,36 @@
 			this.dataGridView1.TabIndex = 9;
 			this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
 			// 
+			// textBox1
+			// 
+			this.textBox1.DelayedTextChangedTimeout = 1000;
+			this.textBox1.Location = new System.Drawing.Point(12, 32);
+			this.textBox1.Name = "textBox1";
+			this.textBox1.Size = new System.Drawing.Size(322, 22);
+			this.textBox1.TabIndex = 10;
+			// 
 			// jsonTestBindingSource
 			// 
 			this.jsonTestBindingSource.DataSource = typeof(OutlookAddInTest.JsonGetter);
+			// 
+			// searchLabel
+			// 
+			this.searchLabel.AutoSize = true;
+			this.searchLabel.Location = new System.Drawing.Point(469, 35);
+			this.searchLabel.Name = "searchLabel";
+			this.searchLabel.Size = new System.Drawing.Size(84, 17);
+			this.searchLabel.TabIndex = 11;
+			this.searchLabel.Text = "Searching...";
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(644, 448);
-			this.Controls.Add(this.dataGridView1);
-			this.Controls.Add(this.comboBox1);
-			this.Controls.Add(this.button3);
+			this.Controls.Add(this.searchLabel);
 			this.Controls.Add(this.textBox1);
+			this.Controls.Add(this.dataGridView1);
+			this.Controls.Add(this.button3);
 			this.Controls.Add(this.Ok);
 			this.Controls.Add(this.Cancel);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -155,11 +150,11 @@
 
         private System.Windows.Forms.Button Cancel;
 		private System.Windows.Forms.Button Ok;
-		private System.Windows.Forms.TextBox textBox1;
 		private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.BindingSource jsonTestBindingSource;
         private System.Windows.Forms.BindingSource bindingSource1;
+		private DelayableTextBox textBox1;
+		private System.Windows.Forms.Label searchLabel;
 	}
 }
