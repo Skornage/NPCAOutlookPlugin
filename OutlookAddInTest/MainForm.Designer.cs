@@ -36,9 +36,9 @@
 			this.button3 = new System.Windows.Forms.Button();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+			this.searchLabel = new System.Windows.Forms.Label();
 			this.textBox1 = new OutlookAddInTest.DelayableTextBox();
 			this.jsonTestBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.searchLabel = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.jsonTestBindingSource)).BeginInit();
@@ -99,6 +99,15 @@
 			this.dataGridView1.TabIndex = 9;
 			this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
 			// 
+			// searchLabel
+			// 
+			this.searchLabel.AutoSize = true;
+			this.searchLabel.Location = new System.Drawing.Point(469, 35);
+			this.searchLabel.Name = "searchLabel";
+			this.searchLabel.Size = new System.Drawing.Size(84, 17);
+			this.searchLabel.TabIndex = 11;
+			this.searchLabel.Text = "Searching...";
+			// 
 			// textBox1
 			// 
 			this.textBox1.DelayedTextChangedTimeout = 1000;
@@ -110,15 +119,6 @@
 			// jsonTestBindingSource
 			// 
 			this.jsonTestBindingSource.DataSource = typeof(OutlookAddInTest.JsonGetter);
-			// 
-			// searchLabel
-			// 
-			this.searchLabel.AutoSize = true;
-			this.searchLabel.Location = new System.Drawing.Point(469, 35);
-			this.searchLabel.Name = "searchLabel";
-			this.searchLabel.Size = new System.Drawing.Size(84, 17);
-			this.searchLabel.TabIndex = 11;
-			this.searchLabel.Text = "Searching...";
 			// 
 			// MainForm
 			// 
@@ -137,6 +137,7 @@
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Phoenix";
+			this.TopMost = true;
 			this.Load += new System.EventHandler(this.FormTest_Load);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
