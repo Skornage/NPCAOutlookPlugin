@@ -147,10 +147,12 @@ namespace OutlookAddInTest
         private void initializeDataGrid()
         {
 			dt = new DataTable();
-            dt.Columns.Add("id", typeof(String));
+			dt.Columns.Add("id", typeof(String));
+			dt.Columns.Add("type", typeof(Bitmap));
             dt.Columns.Add("name", typeof(String));
 			dt.Columns.Add("email", typeof(String));
-			dt.Columns.Add("type", typeof(String));
+			dt.Columns.Add("city", typeof(String));
+			dt.Columns.Add("state", typeof(String));
 			bs.DataSource = dt;
 			dataGridView1.DataSource = bs;
         }
@@ -160,13 +162,20 @@ namespace OutlookAddInTest
 			initializeDataGrid();
 			foreach (Result item in results)
 			{
-				String type = "";
-				if (item.isCompany)
-					type = "Company";
-				else if (item.isContact)
-					type = "Contact";
-				String[] line = {(String) item.idNumber.ToString(),
-					(String) item.name, (String) item.emailAddress, (String) type};
+				Bitmap type;
+				if (item.isContact)
+				{
+					type = new Bitmap(AppDomain.CurrentDomain.BaseDirectory + @"..\..\res\fa-user.bmp");
+				}
+				else
+				{
+					type = new Bitmap(AppDomain.CurrentDomain.BaseDirectory + @"..\..\res\fa-industry.bmp");
+				}
+
+				Object[] line = {(String) item.idNumber.ToString(), (Bitmap) type,
+					(String) item.name, (String) item.emailAddress,
+								(String) item.city, (String) item.stateProvince};
+
 				dt.Rows.Add(line);
 			}
 		}

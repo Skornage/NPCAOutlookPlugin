@@ -46,7 +46,7 @@
 			// 
 			// Cancel
 			// 
-			this.Cancel.Location = new System.Drawing.Point(540, 407);
+			this.Cancel.Location = new System.Drawing.Point(680, 407);
 			this.Cancel.Name = "Cancel";
 			this.Cancel.Size = new System.Drawing.Size(90, 29);
 			this.Cancel.TabIndex = 1;
@@ -56,7 +56,7 @@
 			// 
 			// Ok
 			// 
-			this.Ok.Location = new System.Drawing.Point(438, 407);
+			this.Ok.Location = new System.Drawing.Point(587, 407);
 			this.Ok.Name = "Ok";
 			this.Ok.Size = new System.Drawing.Size(87, 29);
 			this.Ok.TabIndex = 2;
@@ -92,10 +92,11 @@
 			this.dataGridView1.GridColor = System.Drawing.SystemColors.ButtonHighlight;
 			this.dataGridView1.Location = new System.Drawing.Point(12, 78);
 			this.dataGridView1.Name = "dataGridView1";
+			this.dataGridView1.ReadOnly = true;
 			this.dataGridView1.RowHeadersVisible = false;
 			this.dataGridView1.RowTemplate.Height = 24;
 			this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dataGridView1.Size = new System.Drawing.Size(618, 315);
+			this.dataGridView1.Size = new System.Drawing.Size(758, 315);
 			this.dataGridView1.TabIndex = 9;
 			this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
 			// 
@@ -124,7 +125,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(644, 448);
+			this.ClientSize = new System.Drawing.Size(782, 448);
 			this.Controls.Add(this.searchLabel);
 			this.Controls.Add(this.textBox1);
 			this.Controls.Add(this.dataGridView1);
@@ -133,7 +134,7 @@
 			this.Controls.Add(this.Cancel);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.MaximumSize = new System.Drawing.Size(662, 500);
+			this.MaximumSize = new System.Drawing.Size(800, 500);
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Phoenix";
