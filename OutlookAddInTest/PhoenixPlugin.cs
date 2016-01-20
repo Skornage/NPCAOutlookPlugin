@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using Outlook = Microsoft.Office.Interop.Outlook;
 using Office = Microsoft.Office.Core;
 using System.Collections;
+using log4net;
 
 namespace OutlookAddInTest
 {
@@ -30,6 +31,8 @@ namespace OutlookAddInTest
 					OlDefaultFolders.olFolderInbox);
 
 			items = inbox.Items;
+
+			log4net.Config.XmlConfigurator.Configure();
         }
 
 		private void Custom_CurrentExplorer_Event()
@@ -79,7 +82,6 @@ namespace OutlookAddInTest
 
 		protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject()
 		{
-			//this.currentUser = this.Application.Session.CurrentUser.AddressEntry.GetExchangeUser();
 			return new MainRibbon(this);
 		}
 

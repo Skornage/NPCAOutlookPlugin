@@ -25,16 +25,16 @@ namespace OutlookAddInTest
 		List<Result> results;
 		private Outlook.ExchangeUser currentUser;
 
+		private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
 		public MainForm(Outlook.MailItem mailItem, PhoenixPlugin app)
 		{
 			this.currentUser = app.Application.Session.CurrentUser.AddressEntry.GetExchangeUser();
 			this.mailItem = mailItem;
 			InitializeComponent();
 			initializeDataGrid();
-			//comboBox1.SelectedIndex = 0;
 			textBox1.setDelayedTextChangedTimerTickHandler(new EventHandler(HandleDelayedTextChangedTimerTick));
 			searchLabel.Hide();
-			//+= new EventHandler(searchTextChanged);
 		}
 
 		private void HandleDelayedTextChangedTimerTick(object sender, EventArgs e)
@@ -46,18 +46,6 @@ namespace OutlookAddInTest
 			populateDataGrid(results);
 			searchLabel.Hide();
 		}
-
-		//private void searchTextChanged(object sender, EventArgs e)
-		//{
-		//	if (comboBox1.SelectedIndex != 0)
-		//	{
-		//		bs.Filter = string.Format("name LIKE '{0}%' AND type='{1}'", textBox1.Text, comboBox1.SelectedItem);
-		//	}
-		//	else
-		//	{
-		//		bs.Filter = string.Format("name LIKE '{0}%'", textBox1.Text);
-		//	}
-		//}
 
 		private void Cancel_Click(object sender, EventArgs e)
 		{
@@ -76,7 +64,6 @@ namespace OutlookAddInTest
 				var entityIdProperty = mailItem.UserProperties.Add("entityId",
 					Outlook.OlUserPropertyType.olText, false, 1);
 
-				//DataGridViewRow row = dataGridView1.CurrentRow;
 				foreach (DataGridViewRow row in dataGridView1.SelectedRows)
 				{
 					String username = this.currentUser.Name;
@@ -105,7 +92,6 @@ namespace OutlookAddInTest
 					foreach (Outlook.Attachment attachment in mailItem.Attachments)
 					{
 						String fileName = attachment.FileName;
-						//String mediaTypeName = attachment.PropertyAccessor.GetProperty(PR_ATTACH_MIME_TAG);
 						byte[] content = attachment.PropertyAccessor.GetProperty(PR_ATTACH_DATA_BIN);
 						archAttachment = new ArchiveEmailAttachment(fileName, content);
 						toArchive.addAttachment(archAttachment);
@@ -132,27 +118,15 @@ namespace OutlookAddInTest
 			catch { return false; }
 		}
 
-		//private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-		//{
-		//	if (comboBox1.SelectedIndex != 0)
-		//	{
-		//		dt.DefaultView.RowFilter = string.Format("type = '{0}' AND name LIKE '%{1}%'", comboBox1.SelectedItem, textBox1.Text);
-		//	}
-		//	else
-		//	{
-		//		dt.DefaultView.RowFilter = "";
-		//	}
-		//}
-
         private void initializeDataGrid()
         {
 			dt = new DataTable();
-			dt.Columns.Add("id", typeof(String));
-			dt.Columns.Add("type", typeof(Bitmap));
-            dt.Columns.Add("name", typeof(String));
-			dt.Columns.Add("email", typeof(String));
-			dt.Columns.Add("city", typeof(String));
-			dt.Columns.Add("state", typeof(String));
+			dt.Columns.Add("ID", typeof(String));
+			dt.Columns.Add("Type", typeof(Bitmap));
+            dt.Columns.Add("Name", typeof(String));
+			dt.Columns.Add("Email", typeof(String));
+			dt.Columns.Add("City", typeof(String));
+			dt.Columns.Add("State", typeof(String));
 			bs.DataSource = dt;
 			dataGridView1.DataSource = bs;
         }
@@ -165,11 +139,11 @@ namespace OutlookAddInTest
 				Bitmap type;
 				if (item.isContact)
 				{
-					type = new Bitmap(AppDomain.CurrentDomain.BaseDirectory + @"..\..\res\fa-user.bmp");
+					type = new Bitmap(Properties.Resources.contact);
 				}
 				else
 				{
-					type = new Bitmap(AppDomain.CurrentDomain.BaseDirectory + @"..\..\res\fa-industry.bmp");
+					type = new Bitmap(Properties.Resources.company);
 				}
 
 				Object[] line = {(String) item.idNumber.ToString(), (Bitmap) type,
@@ -187,15 +161,12 @@ namespace OutlookAddInTest
 
 		private void button3_Click(object sender, EventArgs e)
 		{
-			//SearchForm searchForm = new SearchForm(this);
-			//searchForm.Show();
 			results = textBox1.OnDelayedTextChanged(EventArgs.Empty);
 			populateDataGrid(results);
 		}
 
         public void advancedSearch(string id, string type, string name, string email)
         {
-			//comboBox1.SelectedIndex = 0;
             bs.Filter = string.Format("id LIKE '%{0}%' AND type LIKE '%{1}%' AND name LIKE '%{2}%' AND email LIKE '%{3}%'",
                                        id, type, name, email);
         }

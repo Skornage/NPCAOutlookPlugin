@@ -17,7 +17,7 @@ namespace OutlookAddInTest
 		public DelayableTextBox()
 			: base()
 		{
-			this.DelayedTextChangedTimeout = 1500; // 1.5 seconds
+			this.DelayedTextChangedTimeout = 1000; // 1.0 seconds
 		}
 
 		protected override void Dispose(bool disposing)
@@ -45,7 +45,6 @@ namespace OutlookAddInTest
 				String[] query = parseInputText(this.Text);
 				if (query != null)
 				{
-					System.Diagnostics.Trace.WriteLine("Searching2");
 					results = JsonGetter.GetSearchResults(query);
 				}
 			}
